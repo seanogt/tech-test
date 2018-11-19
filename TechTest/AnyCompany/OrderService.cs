@@ -6,18 +6,29 @@
 
         public bool PlaceOrder(Order order, int customerId)
         {
+            if (order == null || customerId < 0) return false;
+
             Customer customer = CustomerRepository.Load(customerId);
+
+            if (customer == null) return false;
 
             if (order.Amount == 0)
                 return false;
 
             if (customer.Country == "UK")
-                order.VAT = 0.2d;
+                order.VAT = 0.2f;
             else
                 order.VAT = 0;
 
-            orderRepository.Save(order);
-
+            try
+            {
+                orderRepository.Save(order, customerId);
+            }
+            catch
+            {
+                return false;
+            }
+                
             return true;
         }
     }
