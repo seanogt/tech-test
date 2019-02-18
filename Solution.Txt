@@ -1,0 +1,38 @@
+- Solution is not fully completed however only completed to the extent to prove the approach and concept. 
+- Dependency injection is used heavily to make is losley coupled and easy to test/mock.
+- "static" class declarations is not changed.
+- Only basic test cases has been added to prove the point.
+
+CustomerDbContext - NEW:
+	1. ADO.Net is replaced by EF
+
+IUnitOfWork/UnitOfWork - NEW:
+	1. New interface and class has been added.
+
+CustomerOrder - NEW:
+	1. Mapping object, this contains the customer and it's orders if it has any.
+
+VAT - NEW:
+	1. This is introduced to follow OCP.
+
+App.config - NEW:
+	1. Connection string is moved here.
+
+CustomerRepository:
+	1. Multiline ADO.net code is replaced by EF
+	2. Load All customers implemented
+
+OrderRepository:
+	1. Code is refactored to make it clean, readable and testable.
+
+OrderService:
+	1. Refactored to make is extensible/OCP, clean, readable and testable.
+
+Test - NEW:
+	1. CustomerRepositoryTest 
+	2. OrderRepositoryTest
+	3. UnitOfWorkTest
+	4. OrderServiceTest
+
+
+	

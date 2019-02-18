@@ -1,9 +1,11 @@
 ﻿using System;
 
-namespace AnyCompany
+namespace AnyCompany.Entity
 {
     public class Customer
     {
+        public int CustomerId { get; set; }
+
         public string Country { get; set; }
 
         public DateTime DateOfBirth { get; set; }
