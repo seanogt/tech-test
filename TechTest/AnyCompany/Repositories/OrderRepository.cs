@@ -1,8 +1,10 @@
-﻿using System.Data.SqlClient;
+﻿using AnyCompany.Repositories;
+using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace AnyCompany
 {
-    internal class OrderRepository : AnyCompany.Repositories.IOrderRepository
+    internal class OrderRepository : IOrderRepository
     {
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
@@ -20,6 +22,17 @@ namespace AnyCompany
             command.ExecuteNonQuery();
 
             connection.Close();
+        }
+
+
+        public IEnumerable<Order> GetOrders()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Order> GetOrdersByCustomerId(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
