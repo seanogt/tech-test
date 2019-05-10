@@ -8,25 +8,16 @@
         {
             Customer customer = LoadACustomerFromCustomerRepository(customerId);
 
-            if (order.Amount == 0)
+            if (!order.IsValid())
                 return false;
 
-            order = SetVAT(order, customer);
-
-            SaveOrderToOrderRepository(order);
+           
+            SaveOrderToOrderRepository(order.SetVAT(customer));
 
             return true;
         }
 
-        public Order SetVAT(Order order, Customer customer)
-        {
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
-
-            return order;
-        }
+      
 
         protected virtual void SaveOrderToOrderRepository(Order order)
         {

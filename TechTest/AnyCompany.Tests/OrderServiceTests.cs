@@ -53,20 +53,6 @@ namespace AnyCompany.Tests
         }
 
 
-        [Test()]
-        public void GivenNonUKCustomer_SetVAT_ShouldSetVATToZero()
-        {
-            var result = service.SetVAT(VALID_ORDER, NON_UK_CUSTOMER);
-            Assert.That(result.VAT ==0);
-        }
-
-        [Test()]
-        public void GivenAUKCustomer_SetVAT_ShouldSetVATTo2Percents()
-        {
-            var result = service.SetVAT(VALID_ORDER, UK_CUSTOMER);
-            Assert.That(result.VAT == 0.2d);
-        }
-
         private class TestableOrderService : OrderService
         {
 

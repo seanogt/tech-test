@@ -45,6 +45,8 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Repositories\CustomRepositoryInstance.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Services\OrderService.cs" />
