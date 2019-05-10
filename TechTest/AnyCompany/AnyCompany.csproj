@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomExceptions\InvalidOrderException.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Models\Order.cs" />

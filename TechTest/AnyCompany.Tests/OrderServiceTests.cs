@@ -2,6 +2,7 @@
 using System;
 using Moq;
 using AnyCompany.Repositories;
+using AnyCompany.CustomExceptions;
 
 namespace AnyCompany.Tests
 {
@@ -11,9 +12,13 @@ namespace AnyCompany.Tests
         readonly Order VALID_ORDER = new Order() { OrderId = 1, Amount = 5, VAT = 0.5d };
         readonly int NON_EXISTENT_CUSTOMER_ID=1;
 
-        private int EXISTING_CUSTOMER_ID = 2;
+        readonly int EXISTING_CUSTOMER_ID = 2;
+        readonly     Order INVALID_ZERO_AMOUNT_ORDER = new Order() { OrderId = 2, Amount = 0, VAT = 0.1d };
 
         private OrderService service;
+        readonly Customer NON_UK_CUSTOMER= new Customer() { Name = "John", Country = "Sweden", DateOfBirth = new DateTime(1971, 7, 22) };
+        readonly Customer UK_CUSTOMER = new Customer() { Name = "Jane", Country = "UK", DateOfBirth = new DateTime(1981, 4, 13) };
+       
        
 
         [SetUp]
@@ -35,6 +40,32 @@ namespace AnyCompany.Tests
             Assert.DoesNotThrow(()=> service.PlaceOrder(VALID_ORDER, EXISTING_CUSTOMER_ID));
         }
 
+        //[Test()]
+        //public void GivenZeroAmountOrder_PlaceOrder_ShouldThrowInvalidOrderException()
+        //{
+        //    Assert.Throws<InvalidOrderException>(() => service.PlaceOrder(INVALID_ZERO_AMOUNT_ORDER, EXISTING_CUSTOMER_ID));
+        //}
+
+        [Test()]
+        public void GivenZeroAmountOrder_PlaceOrder_ShouldReturnFalse()
+        {
+            Assert.That(service.PlaceOrder(INVALID_ZERO_AMOUNT_ORDER, EXISTING_CUSTOMER_ID), Is.False);
+        }
+
+
+        [Test()]
+        public void GivenNonUKCustomer_SetVAT_ShouldSetVATToZero()
+        {
+            var result = service.SetVAT(VALID_ORDER, NON_UK_CUSTOMER);
+            Assert.That(result.VAT ==0);
+        }
+
+        [Test()]
+        public void GivenAUKCustomer_SetVAT_ShouldSetVATTo2Percents()
+        {
+            var result = service.SetVAT(VALID_ORDER, UK_CUSTOMER);
+            Assert.That(result.VAT == 0.2d);
+        }
 
         private class TestableOrderService : OrderService
         {

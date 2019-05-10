@@ -11,14 +11,21 @@
             if (order.Amount == 0)
                 return false;
 
+            order = SetVAT(order, customer);
+
+            SaveOrderToOrderRepository(order);
+
+            return true;
+        }
+
+        public Order SetVAT(Order order, Customer customer)
+        {
             if (customer.Country == "UK")
                 order.VAT = 0.2d;
             else
                 order.VAT = 0;
 
-            SaveOrderToOrderRepository(order);
-
-            return true;
+            return order;
         }
 
         protected virtual void SaveOrderToOrderRepository(Order order)
