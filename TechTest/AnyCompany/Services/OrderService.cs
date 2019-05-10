@@ -30,16 +30,15 @@ namespace AnyCompany
                 return false;
 
            
-            SaveOrderToOrderRepository(order.SetVAT(customer));
+            if(!SaveOrderToOrderRepository(order.SetVAT(customer)))
+                return false;
 
             return true;
         }
 
-      
-
-        protected virtual void SaveOrderToOrderRepository(Order order)
+        protected virtual bool SaveOrderToOrderRepository(Order order)
         {
-            _orderRepository.Save(order);
+            return _orderRepository.Save(order);
         }
 
         protected virtual Customer LoadACustomerFromCustomerRepository(int customerId)

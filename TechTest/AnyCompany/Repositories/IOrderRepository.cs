@@ -5,7 +5,7 @@ namespace AnyCompany.Repositories
 {
     public interface IOrderRepository
     {
-        void Save(Order order);
+        bool Save(Order order);
         IEnumerable<Order> GetOrders();
         IEnumerable<Order> GetOrdersByCustomerId(int id);
     }

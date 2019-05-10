@@ -8,20 +8,33 @@ namespace AnyCompany
     {
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
-        public void Save(Order order)
+        public bool Save(Order order)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
 
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
+                    SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
 
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
-            command.Parameters.AddWithValue("@Amount", order.Amount);
-            command.Parameters.AddWithValue("@VAT", order.VAT);
+                    command.Parameters.AddWithValue("@OrderId", order.OrderId);
+                    command.Parameters.AddWithValue("@Amount", order.Amount);
+                    command.Parameters.AddWithValue("@VAT", order.VAT);
 
-            command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
 
-            connection.Close();
+                    connection.Close();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                return false;
+            }
+
+            return true;
+          
         }
 
 

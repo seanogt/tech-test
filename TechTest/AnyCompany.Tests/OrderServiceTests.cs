@@ -24,7 +24,6 @@ namespace AnyCompany.Tests
 
         private OrderService service;
         
-       
 
         [SetUp]
         public void Setup()
@@ -36,12 +35,14 @@ namespace AnyCompany.Tests
         [Test()]
         public void GivenNonExistentCustomerId_PlaceOrder_ShouldThrowNullReferenceException()
         {
+            //assert
             Assert.Throws<NullReferenceException>(() => service.PlaceOrder(VALID_ORDER, NON_EXISTENT_CUSTOMER_ID));
         }
 
         [Test()]
         public void GivenExistingCustomerId_PlaceOrder_ShouldNotThrow()
         {
+            //assert
             Assert.DoesNotThrow(()=> service.PlaceOrder(VALID_ORDER, EXISTING_CUSTOMER_ID));
         }
 
@@ -54,12 +55,14 @@ namespace AnyCompany.Tests
         [Test()]
         public void GivenZeroAmountOrder_PlaceOrder_ShouldReturnFalse()
         {
+            //assert
             Assert.That(service.PlaceOrder(INVALID_ZERO_AMOUNT_ORDER, EXISTING_CUSTOMER_ID), Is.False);
         }
 
         [Test()]
         public void GetOrders_ShouldReturn2Orders()
         {
+            //arrange
             var orders = new List<Order>();
             orders.Add(VALID_ORDER);
             orders.Add(ANOTHER_VALID_ORDER);
@@ -71,8 +74,11 @@ namespace AnyCompany.Tests
 
             service = new TestableOrderService(orderRepoMock.Object, customerRepoMock.Object);
 
+
+            //act
             var result = service.GetOrders();
 
+            //assert
             Assert.That(result.Count() == 2);
 
         }
@@ -80,6 +86,7 @@ namespace AnyCompany.Tests
         [Test()]
         public void GivenACustomerId_GetOrdersByCustomerId_ShouldReturnCorrectOrder()
         {
+            //arrange
             var orders = new List<Order>();
             orders.Add(VALID_ORDER);
             orders.Add(ANOTHER_VALID_ORDER);
@@ -91,8 +98,10 @@ namespace AnyCompany.Tests
 
             service = new TestableOrderService(orderRepoMock.Object, customerRepoMock.Object);
 
+            //act
             var result = service.GetOrdersByCustomerId(EXISTING_CUSTOMER_ID);
 
+            //assert
             Assert.That(result.SingleOrDefault().Amount == 5);
 
         }
@@ -117,10 +126,10 @@ namespace AnyCompany.Tests
                     return new Customer();
             }
 
-            protected override void SaveOrderToOrderRepository(Order order)
+            protected override bool SaveOrderToOrderRepository(Order order)
             {
                 var mockOrderRepository = new Mock<IOrderRepository>();
-                mockOrderRepository.Object.Save(order);
+                return mockOrderRepository.Object.Save(order);
             }
 
         }

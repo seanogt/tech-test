@@ -14,14 +14,20 @@ namespace AnyCompany.Tests
         [Test()]
         public void GivenNonUKCustomer_SetVAT_ShouldSetVATToZero()
         {
+            //act
             var order = VALID_ORDER.SetVAT(NON_UK_CUSTOMER);
+
+            //assert
             Assert.That(order.VAT == 0);
         }
 
         [Test()]
         public void GivenAUKCustomer_SetVAT_ShouldSetVATTo2Percents()
         {
+            //act
             var order = VALID_ORDER.SetVAT(UK_CUSTOMER);
+
+            //assert
             Assert.That(order.VAT == 0.2d);
         }
     }
