@@ -6,7 +6,7 @@
 
         public bool PlaceOrder(Order order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            Customer customer = LoadACustomerFromCustomerRepository(customerId);
 
             if (order.Amount == 0)
                 return false;
@@ -19,6 +19,12 @@
             orderRepository.Save(order);
 
             return true;
+        }
+
+        protected virtual Customer LoadACustomerFromCustomerRepository(int customerId)
+        {
+            Customer customer = CustomerRepository.Load(customerId);
+            return customer;
         }
     }
 }
