@@ -41,11 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

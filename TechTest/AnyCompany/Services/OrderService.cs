@@ -16,9 +16,14 @@
             else
                 order.VAT = 0;
 
-            orderRepository.Save(order);
+            SaveOrderToOrderRepository(order);
 
             return true;
+        }
+
+        protected virtual void SaveOrderToOrderRepository(Order order)
+        {
+            orderRepository.Save(order);
         }
 
         protected virtual Customer LoadACustomerFromCustomerRepository(int customerId)
