@@ -1,0 +1,29 @@
+Brief overview of solution :-
+
+1.      Restructured solution into folders for better readability
+2.      Database/Repository Layer:-
+		a.     Used EF6 instead of ADO.Net
+		b.     Code First Approach has been used
+		c.     Seeded sample data into customers table through code – just to showcase the migration of any existing database of customers
+		d.     Created Two different Contexts as Customers and Orders database – though ideally they should have been in same database as different tables.
+		e.     Moved connection strings to app.config
+3.      Service Layer
+		a.     CustomerOrderService
+			   i.      Renamed OrderService and enhanced it to add functioanlity for loading customers with their linked orders
+			   ii.     It exposing following functions :-
+					   1.       PlaceOrder – Add order linked to a customer
+					   2.       LoadAllCustomers – Load all customers along with their linked orders
+			           3.       LoadOrders – Load all orders
+			   iii.    It injects – IOrderRepository, ICustomerRepositoryService and IVatService to perform required actions
+		b.     IVatService/VatService has been implemented to isolate Business Logic of VAT calculations
+		c.     ICustomerRepositoryService/CustomerRepositoryService has been implemented as an wrapper over static CustomerRepositoryClass to enable DI
+4.      Unit Tests
+		a.     Unit test implemented for CustomerOrderService to demonstrates unit test of service layer using XUnits and Moq.
+			   i.      OrderRepository and CustomerRepositoryService has been mocked using moq
+		       ii.     VATService has not been mocked as it does not have any dependency
+
+Good to have Improvements/Extensions :
+
+1.       Expose WebAPI for the service layer and share Swagger Contract for third parties to consume
+2.       Implement Exception Handling and Logging
+3.       Automapper to map Customer Entity to CustomerOrderModel
