@@ -40,12 +40,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="Entities\OrderDbContext.cs" />
+    <Compile Include="Migrations\ContextCustomer\201906190452488_InitialCreateCustomer.cs" />
+    <Compile Include="Migrations\ContextCustomer\201906190452488_InitialCreateCustomer.Designer.cs">
+      <DependentUpon>201906190452488_InitialCreateCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContextCustomer\ConfigurationCustomer.cs" />
+    <Compile Include="Migrations\ContextOrder\201906190453415_InitialCreateOrder.cs" />
+    <Compile Include="Migrations\ContextOrder\201906190453415_InitialCreateOrder.Designer.cs">
+      <DependentUpon>201906190453415_InitialCreateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContextOrder\ConfigurationOrder.cs" />
+    <Compile Include="Models\CustomerOrderModel.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\CustomerDbContext.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Service\CustomerRepositoryService.cs" />
+    <Compile Include="Service\ICustomerRepositoryService.cs" />
+    <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Service\ICustomerOrderService.cs" />
+    <Compile Include="Service\CustomerOrderService.cs" />
+    <Compile Include="Service\IVatService.cs" />
+    <Compile Include="Service\VatService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.2.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\ContextCustomer\201906190452488_InitialCreateCustomer.resx">
+      <DependentUpon>201906190452488_InitialCreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContextOrder\201906190453415_InitialCreateOrder.resx">
+      <DependentUpon>201906190453415_InitialCreateOrder.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
