@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Data.SqlClient;
+using AnyCompany.Service.Models;
 
-namespace AnyCompany
+namespace AnyCompany.Service
 {
+    /// <summary>
+    /// Legacy implementation of the repo, consume it if new one breaks.
+    /// </summary>
     public static class CustomerRepository
     {
         private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
         public static Customer Load(int customerId)
         {
-            Customer customer = new Customer();
 
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
@@ -17,12 +20,14 @@ namespace AnyCompany
             SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
                 connection);
             var reader = command.ExecuteReader();
+            Customer customer = null;
 
             while (reader.Read())
             {
-                customer.Name = reader["Name"].ToString();
-                customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Country = reader["Country"].ToString();
+                customer = new Customer(
+                    reader["Name"].ToString(),
+                    DateTime.Parse(reader["DateOfBirth"].ToString()),
+                    reader["Country"].ToString());
             }
 
             connection.Close();
