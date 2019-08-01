@@ -1,8 +1,8 @@
-﻿namespace AnyCompany
+﻿
+namespace AnyCompany.Service.DTOs
 {
-    public class Order
+    public class OrderDto
     {
-        public int OrderId { get; set; }
         public double Amount { get; set; }
         public double VAT { get; set; }
     }
