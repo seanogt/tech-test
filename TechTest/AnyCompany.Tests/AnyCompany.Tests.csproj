@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Integration" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\AnyCompany.Service\AnyCompany.Service.csproj" />
     </ItemGroup>
 
