@@ -15,7 +15,7 @@ namespace AnyCompany.Service.DAL.DataManagers
 
         public async Task<decimal> GetTaxByType(string taxType)
         {
-            var results = await this.database.ExecuteSqlFile("get-tax-by-type", taxType);
+            var results = await this.database.ExecuteSqlFile("get-tax-by-type", new [] {taxType});
             if (!results.Any())
             {
                 // no taxes found.

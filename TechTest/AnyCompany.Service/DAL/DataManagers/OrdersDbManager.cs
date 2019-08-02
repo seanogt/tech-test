@@ -18,7 +18,7 @@ namespace AnyCompany.Service.DAL.DataManagers
 
         public async Task<Order> GetOrderById(string orderId)
         {
-            var results = await this._database.ExecuteSqlFile("orders/get-order-by-id", orderId);
+            var results = await this._database.ExecuteSqlFile("Orders/get-order-by-id", new [] {orderId});
             if (!results.Any())
             {
                 throw new Exception("Not found!");
@@ -34,7 +34,7 @@ namespace AnyCompany.Service.DAL.DataManagers
 
         public async Task<IEnumerable<Order>> GetOrdersByCustomer(string customerId)
         {
-            var results = await this._database.ExecuteSqlFile("orders/get-order-by-customer", customerId);
+            var results = await this._database.ExecuteSqlFile("Orders/get-order-by-customer", new [] {customerId});
             if (!results.Any())
             {
                 throw new Exception("Not found!");
@@ -50,8 +50,7 @@ namespace AnyCompany.Service.DAL.DataManagers
 
         public async Task<string> CreateOrderForCustomer(Order order)
         {
-            var results = await this._database.ExecuteSqlFile("orders/create-order", order.OrderId, order.Amount,
-                order.VAT, order.CustomerId);
+            var results = await this._database.ExecuteSqlFile("Orders/create-order", new object [] {order.OrderId, order.Amount, order.VAT, order.CustomerId});
 
             if (!results.Any())
             {

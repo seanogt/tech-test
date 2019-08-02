@@ -34,7 +34,7 @@ namespace AnyCompany.Service.Container
             Logger = new StdOutLogger(Console.OpenStandardInput());
             Cache = cache ?? new SimpleInMemoryCache(); 
             
-            DbWrapper = dbWrapper ?? new RelationalDatabaseWrapper(config.DATABASE_URL, Cache, Logger);
+            DbWrapper = dbWrapper ?? new RelationalDatabaseWrapper(Config.DATABASE_URL, Cache, Config.ROOT_QUERIES_DIR, Logger);
 
             CustomersFacade = customersFacade ?? new CustomersDbManager(DbWrapper);
             TaxesFacade = taxesFacade ?? new TaxesDbManager(DbWrapper);

@@ -10,7 +10,9 @@ namespace AnyCompany.Service.Config
         public DefaultConfig()
         {
             this.DATABASE_URL = Environment.GetEnvironmentVariable("DATABASE_URL");
+            this.ROOT_QUERIES_DIR = Environment.GetEnvironmentVariable("ROOT_QUERIES_DIR");
         }
         public string DATABASE_URL { get; }
+        public string ROOT_QUERIES_DIR { get; }
     }
 }

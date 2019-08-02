@@ -17,7 +17,7 @@ namespace AnyCompany.Service.DAL.DataManagers
         
         public async Task<Customer> GetCustomerById(string customerId)
         {
-            var results = await this.database.ExecuteSqlFile("get-customer-by-id", customerId);
+            var results = await this.database.ExecuteSqlFile("Customer/get-customer-by-id", new [] { customerId });
             if (!results.Any())
             {
                 // Raise not found
@@ -30,7 +30,7 @@ namespace AnyCompany.Service.DAL.DataManagers
 
         public async Task<string> CreateCustomer(Customer customer)
         {
-            var results = await this.database.ExecuteSqlFile("create-customer", customer.Country, customer.DateOfBirth, customer.Name);
+            var results = await this.database.ExecuteSqlFile("Customer/create-customer", new object [] {customer.Country, customer.DateOfBirth, customer.Name});
             if (!results.Any())
             {
                 //How did this happeN? Raise an error?

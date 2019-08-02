@@ -1,3 +1,39 @@
+## Investec Solution
+
+- I've implemented the solution following my own best practices and experience.
+- The main principle is keeping code clean, simple to read and understand, testable, and following all SOLIDU principles.
+- I did not want to add any kind of additional libraries to this solution, as adding libraries does not prove anything.
+  There are different DI containers available, there are various loggers, ORM frameworks, different RESTful/Stateful/GraphQL(ful) frameworks for adding a Web later on existing code, and so on. Not interesting in the scope of this solution.
+- My code does not use the old implementation of the service, as that implementation was: non-functional, poorly designed, and insecure. It was subject to SQL injections, as well as non-performant, and unscalable. That being said, since the code is using DI and interfaces to declare the business functionality, the old implementation can easily be consumed by an implentor of one of the business-model facades. (in the `Facades` folder)
+The old implementation resides in /AnyCompany.Service/DAL/DataManagers/V1
+- The projects in the solution were not targeting .NET Core, so I changed them to target Core instead of 4.5. 
+
+### TODO:
+#### Code:
+If I were to continue implementing this solution, I would:
+1. Configure resources, threads, etc on the API level
+2. Add SwaggerUI which would be hosted with the solution, so that the API is easily accessable and testable
+3. Add authentication mechanism (preferably using JWT or such, in order to avoid session-cookie storage).
+4. Caching, SSR and CDN for any assets that the FE uses
+5. Backend caching in a centralised, scalable system such as Redis
+
+#### Tests:
+1. Add integration tests that would cover complete flows as well as integration with 3rd parties
+2. Add more extensive unit tests
+3. Add a health endpoint + some pinging process that would make sure our environment in production is up and running, and serving customers 
+
+#### DevOps:
+   
+1. Add a Dockerfile to host the solution in a docker container, thus making the deployments easy and isolated.
+2. Create a CI/CD pipeline, host it on a low-maintenance environment such as Heroku or Azure Devops (If the company policy allows that, isntead of self-hosting)
+3. Set up ChatOps to manage deployments 
+4. Set up a scheduler with a CRON jobs executer, for offline tasks execution (i.e upload data to BI environment, run analytics, etc) 
+5. Add tools to monitor the performance of the system (FE+BE+communication) and alert us if the performance goes down.
+6. Database analytics tools (embedded in Heroku out of the box, but we can integrate other tools) to make sure the database does not experience connections exhaustion, deadlocks, etc.
+
+
+# Original instructions:
+
 Hello Candidate,
 
 Welcome to AnyCompany Entertainment.

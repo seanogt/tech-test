@@ -16,7 +16,8 @@ namespace AnyCompany.Service
 
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
-
+                
+            // Keeping for the tasks sake, but this is a SQL injection vulnerability.
             SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
                 connection);
             var reader = command.ExecuteReader();
