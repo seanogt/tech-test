@@ -31,7 +31,7 @@ namespace AnyCompany.Tests.Unit.DAL.DataManagers
         {
             _databaseMock.Setup((_) => _.ExecuteSqlFile(
                 It.IsAny<string>(),
-                It.IsAny<object[]>()
+                It.IsAny<IDictionary<string, object>>()
             )).Returns(
                 Task.FromResult(_mockResults));
 
@@ -39,7 +39,7 @@ namespace AnyCompany.Tests.Unit.DAL.DataManagers
 
             Assert.AreEqual(_databaseMock.Invocations.Count, 1);
             Assert.AreEqual(_databaseMock.Invocations[0].Method.Name, "ExecuteSqlFile");
-            var expectedArgs = new object[] {"Orders/get-order-by-customer", new[] {"customerId"}};
+            var expectedArgs = new object[] {"Order/get-order-by-customer", new Dictionary<string, object> {{"@customer_id", "customerId"}}};
 
             Assert.AreEqual(expectedArgs, _databaseMock.Invocations[0].Arguments.ToArray());
         }

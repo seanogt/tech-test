@@ -31,7 +31,7 @@ namespace AnyCompany.Service.Container
             IOrdersFacade ordersFacade = null)
         {
             Config = config ?? new DefaultConfig(); 
-            Logger = new StdOutLogger(Console.OpenStandardInput());
+            Logger = new StdOutLogger(Console.OpenStandardOutput());
             Cache = cache ?? new SimpleInMemoryCache(); 
             
             DbWrapper = dbWrapper ?? new RelationalDatabaseWrapper(Config.DATABASE_URL, Cache, Config.ROOT_QUERIES_DIR, Logger);

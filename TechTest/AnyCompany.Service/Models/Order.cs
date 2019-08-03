@@ -5,7 +5,7 @@
     /// </summary>
     public class Order
     {
-        public Order(string orderId, double amount, double vat, int customerId)
+        public Order(string orderId, double amount, double vat, string customerId)
         {
             this.OrderId = orderId;
             this.Amount = amount;
@@ -24,7 +24,7 @@
         /// and in order to avoid too many levels of indirection and abstraction, I am allowing myself to add the CustomerId
         /// as a field on the Order Model.
         /// </summary>
-        public int CustomerId { get; private set; }
+        public string CustomerId { get; private set; }
         public double Amount { get; private set; }
         public double VAT { get; private set; }
     }

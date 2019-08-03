@@ -17,7 +17,7 @@ namespace AnyCompany.Tests.Unit.DAL
         }
         
         [Test]
-        public async Task ExecutingSqlFile_ThatDoesNotExist_ThrowsAnError()
+        public void ExecutingSqlFile_ThatDoesNotExist_ThrowsAnError()
         {
             Assert.ThrowsAsync<FileNotFoundException>(async () =>
             {

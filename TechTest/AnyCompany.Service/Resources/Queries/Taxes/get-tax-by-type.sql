@@ -1,2 +1,2 @@
 SELECT * FROM taxes
-WHERE taxes.type = $1;
+WHERE taxes.type = @type;

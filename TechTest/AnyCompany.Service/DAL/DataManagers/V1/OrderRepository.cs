@@ -1,12 +1,15 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using AnyCompany.Service.Models;
 
 namespace AnyCompany.Service
 {
     internal class OrderRepository
     {
+        // Never store creds in the codebase.
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
+        [Obsolete]
         public void Save(Order order)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);

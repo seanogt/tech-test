@@ -1,1 +1,1 @@
-SELECT * FROM orders WHERE order_id = $1
+SELECT * FROM orders WHERE order_id = @order_id

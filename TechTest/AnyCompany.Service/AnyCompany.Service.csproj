@@ -16,4 +16,31 @@
     <Folder Include="Resources\Queries" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Queries\Customer\create-customer.sql" />
+    <EmbeddedResource Include="Resources\Queries\Customer\create-customer.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Queries\Customer\get-customer-by-id.sql" />
+    <EmbeddedResource Include="Resources\Queries\Customer\get-customer-by-id.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Queries\Order\create-order.sql" />
+    <EmbeddedResource Include="Resources\Queries\Order\create-order.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Queries\Order\get-order-by-customer.sql" />
+    <EmbeddedResource Include="Resources\Queries\Order\get-order-by-customer.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Queries\Order\get-order-by-id.sql" />
+    <EmbeddedResource Include="Resources\Queries\Order\get-order-by-id.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Queries\Taxes\get-tax-by-type.sql" />
+    <EmbeddedResource Include="Resources\Queries\Taxes\get-tax-by-type.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

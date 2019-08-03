@@ -9,15 +9,18 @@ namespace AnyCompany.Service
     /// </summary>
     public static class CustomerRepository
     {
+        // Prefer to use ENV variable for storing connection strings, instead of the repo.
         private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
+        [Obsolete]
         public static Customer Load(int customerId)
         {
 
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
                 
-            // Keeping for the tasks sake, but this is a SQL injection vulnerability.
+            // Keeping for the tasks sake, but this is a SQL injection vulnerability. This code is not used anymore.
+            
             SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
                 connection);
             var reader = command.ExecuteReader();
@@ -26,9 +29,10 @@ namespace AnyCompany.Service
             while (reader.Read())
             {
                 customer = new Customer(
-                    reader["Name"].ToString(),
-                    DateTime.Parse(reader["DateOfBirth"].ToString()),
-                    reader["Country"].ToString());
+                    reader["customer_id"].ToString(),
+                    reader["name"].ToString(),
+                    DateTime.Parse(reader["date_of_birth"].ToString()),
+                    reader["country"].ToString());
             }
 
             connection.Close();

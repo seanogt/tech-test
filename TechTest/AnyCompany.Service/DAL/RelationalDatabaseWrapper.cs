@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AnyCompany.Service.Cache;
@@ -26,7 +27,7 @@ namespace AnyCompany.Service.DAL
             _logger = logger;
         }
         
-        public async Task<IEnumerable<IDictionary<string, object>>> ExecuteSqlFile(string fileName, IEnumerable<object> args)
+        public async Task<IEnumerable<IDictionary<string, object>>> ExecuteSqlFile(string fileName, IDictionary<string, object> args)
         {
             var logPrefix = $"Query {fileName}";
             _logger?.Log($"{logPrefix}: Init");
@@ -37,16 +38,23 @@ namespace AnyCompany.Service.DAL
             {
                 using (var command = new SqlCommand())
                 {
+                    // Build the command:
                     command.Connection = connection;
                     command.CommandText = commandText;
                     command.CommandType = CommandType.Text;
+                    command.Parameters.AddRange(args.Select((argKvp) => new SqlParameter(argKvp.Key, argKvp.Value)).ToArray());
                     
-                    _logger?.Log($"{logPrefix}: SqlCommand: ${commandText}");
-                    command.Parameters.AddRange(args.ToArray());
+                    _logger?.Log($"{logPrefix}: SqlCommand: {commandText}");
+                    
                     await connection.OpenAsync();
                     using (var reader = await command.ExecuteReaderAsync())
                     {
                         _logger?.Log($"{logPrefix}: Executed. Parsing results.");
+
+                        if (!reader.HasRows || reader.FieldCount == 0)
+                        {
+                            throw new KeyNotFoundException($"{logPrefix}: NO results returned!");
+                        }
                         while (await reader.ReadAsync())
                         {
                             var columns = new Dictionary<string, object>();
@@ -79,11 +87,20 @@ namespace AnyCompany.Service.DAL
                 }
             }
 
-            var fullPath = Path.Combine(_rootQueriesDir, fileName, ".sql");
+            // Get the full query file as provided by the configuration
+            var fullPath = Path.Combine(_rootQueriesDir, $"{fileName}.sql");
             
             if (!File.Exists(fullPath))
             {
-                throw new FileNotFoundException($"DatabaseWrapper - Query file not found: {fullPath}");
+               // Lookup in the current path if not found in the root path:
+               var relativePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                   fullPath);
+               if (!File.Exists(relativePath))
+               {
+                    throw new FileNotFoundException($"DatabaseWrapper - Query file not found: {fullPath}. Relative lookup failed as well: {relativePath}");
+               }
+
+               fullPath = relativePath;
             }
 
             byte[] buffer = null;

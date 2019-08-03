@@ -12,6 +12,7 @@ namespace AnyCompany.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            DotNetEnv.Env.Load();
             services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IContainer, DefaultContainer>();
         }

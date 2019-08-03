@@ -14,7 +14,7 @@ namespace AnyCompany.Service.Cache
         
         public async Task<string> Get(string key)
         {
-            return await Task.Run(() => _cache[key]);
+            return await Task.Run(() => _cache.ContainsKey(key) ? _cache[key] : null);
         }
 
         public async Task Set(string key, string value)
