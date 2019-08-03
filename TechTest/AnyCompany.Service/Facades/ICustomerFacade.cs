@@ -4,9 +4,9 @@ using AnyCompany.Service.Models;
 namespace AnyCompany.Service.Facades
 {
     /// <summary>
-    /// Describes functionality for retreiving and managing customers.
+    /// Describes functionality for retrieving and managing customers.
     /// This is implementation-agnostic, the implementor can be a local DB provider as well as
-    /// an external service connector. 
+    /// an external service connector.
     /// </summary>
     public interface ICustomerFacade
     {
@@ -18,7 +18,7 @@ namespace AnyCompany.Service.Facades
         Task<Customer> GetCustomerById(string customerId);
         
         /// <summary>
-        /// Creates a customer in a transaction, and returns its ID if successful. 
+        /// Creates a customer, and returns its ID if successful. 
         /// </summary>
         /// <param name="customer">Customer to create</param>
         /// <returns>New customer ID</returns>

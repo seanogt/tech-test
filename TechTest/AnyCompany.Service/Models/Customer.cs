@@ -2,6 +2,9 @@
 
 namespace AnyCompany.Service.Models
 {
+    /// <summary>
+    /// This can be described in an interface as well, but it doesn't add any value.
+    /// </summary>
     public class Customer
     {
         public Customer(string customerId, string country, DateTime dateOfBirth, string name)

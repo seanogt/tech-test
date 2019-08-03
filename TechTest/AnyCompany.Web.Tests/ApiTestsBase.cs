@@ -18,7 +18,7 @@ namespace AnyCompany.Web.Tests
         { 
             _testConfig = new DefaultConfig();
             
-            _databaseWrapper = new RelationalDatabaseWrapper(_testConfig.DATABASE_URL, new SimpleInMemoryCache(), _testConfig.ROOT_QUERIES_DIR, new StdOutLogger(Console.OpenStandardOutput()));
+            _databaseWrapper = new RelationalDatabaseWrapper(_testConfig.DATABASE_URL, new SimpleInMemoryCache(), _testConfig.ROOT_QUERIES_DIR, new StreamLogger(Console.OpenStandardOutput()));
 
             _container = new DefaultContainer(_testConfig, null, _databaseWrapper);
             // Set up mock data in the test database, in order to test flows correctness.

@@ -17,7 +17,7 @@ namespace AnyCompany.Tests.Integration
             // Read from .env.test file, or just use the regular env if running in a docker container.
             _testConfig = new DefaultConfig();
             
-            _databaseWrapper = new RelationalDatabaseWrapper(_testConfig.DATABASE_URL, new SimpleInMemoryCache(), _testConfig.ROOT_QUERIES_DIR, new StdOutLogger(Console.OpenStandardOutput()));
+            _databaseWrapper = new RelationalDatabaseWrapper(_testConfig.DATABASE_URL, new SimpleInMemoryCache(), _testConfig.ROOT_QUERIES_DIR, new StreamLogger(Console.OpenStandardOutput()));
         }
     }
 }

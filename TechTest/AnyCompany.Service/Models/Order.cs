@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// Describes an order
+    /// Can be described in an interface as well, but it doesn't add any value.
     /// </summary>
     public class Order
     {
