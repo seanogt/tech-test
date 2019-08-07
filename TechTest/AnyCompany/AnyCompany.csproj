@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>SA1208</NoWarn>
+    <DocumentationFile>bin\Debug\AnyCompany.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,12 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Repository\CustomerRepositoryInstance.cs" />
+    <Compile Include="Repository\ICustomerRepository.cs" />
+    <Compile Include="Repository\IOrderRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Service\CustomerService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

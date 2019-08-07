@@ -1,5 +1,8 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// <copyright file="AssemblyInfo.cs" company="Investec Bank">
+// Copyright © Investec Bank 2018
+// </copyright>
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
