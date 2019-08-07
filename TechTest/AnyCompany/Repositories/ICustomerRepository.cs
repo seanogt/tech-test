@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnyCompany.Tests
+namespace AnyCompany.Repositories
 {
-    public class Class1
+    public interface ICustomerRepository
     {
+        Customer Load(int customerId);
     }
 }
