@@ -4,8 +4,10 @@
 
 namespace AnyCompany.Repository
 {
+    using System.Collections.Generic;
+
     /// <summary>
-    /// Provides methods for saving (and in future retrieving) orders.
+    /// Provides methods for saving and retrieving orders.
     /// </summary>
     public interface IOrderRepository
     {
@@ -14,5 +16,11 @@ namespace AnyCompany.Repository
         /// </summary>
         /// <param name="order">The order to save.</param>
         void Save(Order order);
+
+        /// <summary>
+        /// Loads all orders.
+        /// </summary>
+        /// <returns>The set of all orders.</returns>
+        IEnumerable<Order> LoadAll();
     }
 }

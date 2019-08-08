@@ -29,11 +29,10 @@ namespace AnyCompany.Service
         /// Attaches a given order to the customer with the given customerId.
         /// </summary>
         /// <param name="order">The order to be placed.</param>
-        /// <param name="customerId">The customer to attach the oder to.</param>
-        /// <returns>True if the order is places successfully, false otherwise.</returns>
-        public bool PlaceOrder(Order order, int customerId)
+        /// <returns>True if the order is placed successfully, false otherwise.</returns>
+        public bool PlaceOrder(Order order)
         {
-            Customer customer = this.customerRepository.Load(customerId);
+            Customer customer = this.customerRepository.Load(order.CustomerId);
 
             if (order.Amount == 0)
             {

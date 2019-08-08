@@ -23,5 +23,10 @@ namespace AnyCompany
         /// Gets or sets the rate of VAT (Value Added Tax) due on this order.
         /// </summary>
         public double VAT { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id of the customer who placed this order.
+        /// </summary>
+        public int CustomerId { get; set; }
     }
 }

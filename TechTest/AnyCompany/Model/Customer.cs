@@ -12,6 +12,11 @@ namespace AnyCompany
     public class Customer
     {
         /// <summary>
+        /// Gets or sets the unique id for this customer.
+        /// </summary>
+        public int CustomerId { get; set; }
+
+        /// <summary>
         /// Gets or sets a description of the country in which the customer lives.
         /// </summary>
         public string Country { get; set; }

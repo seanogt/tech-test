@@ -5,6 +5,7 @@
 namespace AnyCompany.Repository
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.SqlClient;
 
     /// <summary>
@@ -16,6 +17,7 @@ namespace AnyCompany.Repository
         /// <summary>
         /// The connection string to use for connecting to the database.
         /// </summary>
+        // TODO: The connection string should be built from injected config elements, not set statically in code.
         private static readonly string ConnectionString =
             @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
@@ -32,20 +34,62 @@ namespace AnyCompany.Repository
             connection.Open();
 
             SqlCommand command = new SqlCommand(
-                "SELECT * FROM Customer WHERE CustomerId = " + customerId,
+                "SELECT CustomerId, Name, DateOfBirth, Country FROM Customer WHERE CustomerId = " + customerId,
                 connection);
             var reader = command.ExecuteReader();
 
-            while (reader.Read())
+            if (!reader.HasRows)
             {
-                customer.Name = reader["Name"].ToString();
-                customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Country = reader["Country"].ToString();
+                throw new ApplicationException($"Customer not found with id: {customerId}");
+            }
+
+            reader.Read();
+
+            customer.CustomerId = int.Parse(reader["CustomerId"].ToString());
+            customer.Name = reader["Name"].ToString();
+            customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+            customer.Country = reader["Country"].ToString();
+
+            if (reader.Read())
+            {
+                throw new ApplicationException($"More than one customer found with id: {customerId}");
             }
 
             connection.Close();
 
             return customer;
+        }
+
+        /// <summary>
+        /// Loads all customers.
+        /// </summary>
+        /// <returns>The set of all customers.</returns>
+        public static IEnumerable<Customer> LoadAll()
+        {
+            var customers = new List<Customer>();
+
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            connection.Open();
+
+            SqlCommand command =
+                new SqlCommand("SELECT CustomerId, Name, DateOfBirth, Country  FROM Customer", connection);
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                var customer = new Customer
+                {
+                    CustomerId = int.Parse(reader["CustomerId"].ToString()),
+                    Name = reader["Name"].ToString(),
+                    DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString()),
+                    Country = reader["Country"].ToString(),
+                };
+                customers.Add(customer);
+            }
+
+            connection.Close();
+
+            return customers;
         }
     }
 }
