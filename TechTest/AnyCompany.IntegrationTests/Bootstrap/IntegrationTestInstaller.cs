@@ -1,7 +1,10 @@
-﻿using AnyCompany.Data.Contract.Repositories;
+﻿using System.Configuration;
+using AnyCompany.Data.Contract.Repositories;
+using AnyCompany.Data.Dapper.Factories;
 using AnyCompany.Data.Dapper.Repositories;
 using AnyCompany.Services;
 using AnyCompany.Services.Services;
+using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -20,6 +23,16 @@ namespace AnyCompany.IntegrationTests.Bootstrap
 
             container.Register(
                 Component.For<ICustomerRepository, CustomerRepositoryWrapper>());
+
+            container.Register(
+                Component.For<IConnectionFactory>().UsingFactoryMethod(CreateConnectionFactory));
+        }
+
+        private IConnectionFactory CreateConnectionFactory(IKernel kernel)
+        {
+            return new ConnectionFactory(
+                ConfigurationManager.ConnectionStrings["CustomerConnectionString"].ConnectionString,
+                ConfigurationManager.ConnectionStrings["OrderConnectionString"].ConnectionString);
         }
     }
 }

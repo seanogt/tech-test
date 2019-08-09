@@ -1,32 +1,34 @@
-﻿using System.Data.SqlClient;
-using AnyCompany.Data.Contract.Repositories;
+﻿using AnyCompany.Data.Contract.Repositories;
+using AnyCompany.Data.Dapper.Enums;
+using AnyCompany.Data.Dapper.Factories;
 using AnyCompany.Models;
+using Dapper;
 
 namespace AnyCompany.Data.Dapper.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
+        private readonly IConnectionFactory _connectionFactory;
 
-        public void Save(Order order)
+        public OrderRepository(IConnectionFactory connectionFactory)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
-
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
-
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
-            command.Parameters.AddWithValue("@Amount", order.Amount);
-            command.Parameters.AddWithValue("@VAT", order.VAT);
-
-            command.ExecuteNonQuery();
-
-            connection.Close();
+            _connectionFactory = connectionFactory;
         }
 
         public void Add(Order order)
         {
-            Save(order); // TODO just a proxy for now
+            using (var connection = _connectionFactory.Create(ConnectionType.OrderDb))
+            {
+                connection.Open();
+                connection.Execute(@"INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT, @CustomerId)",
+                    new
+                    {
+                        OrderId = order.OrderId,
+                        Amount = order.Amount,
+                        VAT = order.VAT,
+                        CustomerId = order.CustomerId
+                    });
+            }
         }
     }
 }
