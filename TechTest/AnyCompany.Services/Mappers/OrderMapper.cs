@@ -14,5 +14,15 @@ namespace AnyCompany.Services.Mappers
                 VAT = orderDto.VAT
             };
         }
+
+        public static OrderDto Map(Order order)
+        {
+            return new OrderDto
+            {
+                OrderId = order.OrderId,
+                Amount = order.Amount,
+                VAT = order.VAT
+            };
+        }
     }
 }

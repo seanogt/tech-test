@@ -1,4 +1,5 @@
-﻿using AnyCompany.Data.Contract.Repositories;
+﻿using System.Collections.Generic;
+using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Models;
 
 namespace AnyCompany.Data.Dapper.Repositories
@@ -10,6 +11,11 @@ namespace AnyCompany.Data.Dapper.Repositories
         public Customer Load(int customerId)
         {
             return CustomerRepository.Load(customerId);
+        }
+
+        public IEnumerable<Customer> GetList()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

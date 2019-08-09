@@ -1,4 +1,5 @@
-﻿using AnyCompany.Data.Contract.Repositories;
+﻿using System.Collections.Generic;
+using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Data.Dapper.Enums;
 using AnyCompany.Data.Dapper.Factories;
 using AnyCompany.Models;
@@ -29,6 +30,11 @@ namespace AnyCompany.Data.Dapper.Repositories
                         CustomerId = order.CustomerId
                     });
             }
+        }
+
+        public IEnumerable<Order> GetList()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

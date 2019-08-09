@@ -41,10 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\VatConstants.cs" />
+    <Compile Include="Dtos\CustomerDto.cs" />
+    <Compile Include="Dtos\CustomerOrdersDto.cs" />
     <Compile Include="Dtos\OrderDto.cs" />
     <Compile Include="Exceptions\CustomerNotFoundException.cs" />
     <Compile Include="Helpers\VatCalculator.cs" />
+    <Compile Include="Mappers\CustomerMapper.cs" />
     <Compile Include="Mappers\OrderMapper.cs" />
+    <Compile Include="Services\CustomerOrderService.cs" />
+    <Compile Include="Services\ICustomerOrderService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOrderService.cs" />
