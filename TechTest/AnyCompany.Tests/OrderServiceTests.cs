@@ -3,6 +3,7 @@ using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Models;
 using AnyCompany.Services;
 using AnyCompany.Services.Dtos;
+using AnyCompany.Services.Exceptions;
 using Moq;
 using NUnit.Framework;
 
@@ -47,6 +48,43 @@ namespace AnyCompany.Tests
             Assert.AreEqual(orderDto.Amount, inOrder.Amount);
             Assert.AreEqual(vat, inOrder.VAT);
             Assert.AreEqual(CustomerId, inOrder.CustomerId);
+        }
+
+        [Test]
+        public void PlaceOrder_CustomerNotFound_ShouldThrowException()
+        {
+            // Arrange.
+            const int CustomerId = 44;
+
+            _customerRepositoryMock.Setup(r => r.Load(CustomerId))
+                .Returns((Customer)null);
+
+            var orderService = GetOrderService();
+
+            // Act/Assert.
+            Assert.Throws<CustomerNotFoundException>(() => orderService.PlaceOrder(GetOrderDto(), CustomerId));
+        }
+
+        [Test]
+        public void PlaceOrder_AmountIs0_ShouldReturnFalse()
+        {
+            // Arrange.
+            const int CustomerId = 23;
+            var orderDto = GetOrderDto();
+
+            var customer = GetCustomer("UK");
+            _customerRepositoryMock.Setup(r => r.Load(CustomerId))
+                .Returns(customer);
+
+            orderDto.Amount = 0;
+
+            var orderService = GetOrderService();
+
+            // Act.
+            var result = orderService.PlaceOrder(orderDto, CustomerId);
+
+            // Assert.
+            Assert.IsFalse(result);
         }
 
         private Customer GetCustomer(string country)

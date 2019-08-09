@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Constants\VatConstants.cs" />
     <Compile Include="Dtos\OrderDto.cs" />
+    <Compile Include="Exceptions\CustomerNotFoundException.cs" />
     <Compile Include="Helpers\VatCalculator.cs" />
     <Compile Include="Mappers\OrderMapper.cs" />
     <Compile Include="OrderService.cs" />
