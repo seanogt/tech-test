@@ -1,6 +1,7 @@
 ﻿using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Models;
 using AnyCompany.Services.Dtos;
+using AnyCompany.Services.Helpers;
 using AnyCompany.Services.Mappers;
 using AnyCompany.Services.Services;
 
@@ -24,10 +25,7 @@ namespace AnyCompany.Services
             if (orderDto.Amount == 0)
                 return false;
 
-            if (customer.Country == "UK")
-                orderDto.VAT = 0.2d;
-            else
-                orderDto.VAT = 0;
+            orderDto.VAT = VatCalculator.GetVat(customer.Country);
 
             var order = OrderMapper.Map(orderDto);
             order.CustomerId = customerId;

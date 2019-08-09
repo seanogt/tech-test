@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\VatConstants.cs" />
     <Compile Include="Dtos\OrderDto.cs" />
+    <Compile Include="Helpers\VatCalculator.cs" />
     <Compile Include="Mappers\OrderMapper.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
