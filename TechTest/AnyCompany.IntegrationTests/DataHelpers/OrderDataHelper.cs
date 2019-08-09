@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using AnyCompany.Models;
 using Dapper;
 
 namespace AnyCompany.IntegrationTests.DataHelpers

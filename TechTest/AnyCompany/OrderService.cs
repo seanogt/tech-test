@@ -1,22 +1,26 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.Dtos;
+using AnyCompany.Mappers;
+using AnyCompany.Models;
+
+namespace AnyCompany
 {
     public class OrderService
     {
         private readonly OrderRepository orderRepository = new OrderRepository();
 
-        public bool PlaceOrder(Order order, int customerId)
+        public bool PlaceOrder(OrderDto orderDto, int customerId)
         {
             Customer customer = CustomerRepository.Load(customerId);
 
-            if (order.Amount == 0)
+            if (orderDto.Amount == 0)
                 return false;
 
             if (customer.Country == "UK")
-                order.VAT = 0.2d;
+                orderDto.VAT = 0.2d;
             else
-                order.VAT = 0;
+                orderDto.VAT = 0;
 
-            orderRepository.Save(order);
+            orderRepository.Save(OrderMapper.Map(orderDto));
 
             return true;
         }

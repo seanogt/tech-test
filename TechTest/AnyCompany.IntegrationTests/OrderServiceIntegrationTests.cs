@@ -1,5 +1,7 @@
 ﻿using System;
+using AnyCompany.Dtos;
 using AnyCompany.IntegrationTests.DataHelpers;
+using AnyCompany.Models;
 using NUnit.Framework;
 
 namespace AnyCompany.IntegrationTests
@@ -13,7 +15,7 @@ namespace AnyCompany.IntegrationTests
         {
             // Arrange.
             var customer = CustomerDataHelper.Add(GetCustomer(country));
-            var order = GetOrder();
+            var order = GetOrderDto();
             var orderService = new OrderService();
 
             // Act.
@@ -25,9 +27,9 @@ namespace AnyCompany.IntegrationTests
             Assert.IsNotNull(insertedOrder);
         }
 
-        private Order GetOrder()
+        private OrderDto GetOrderDto()
         {
-            return new Order
+            return new OrderDto
             {
                 OrderId = new Random().Next(1, 2000000), // generate a random Id since the OrderId column is not an IDENTITY column
                 Amount = 200.99
