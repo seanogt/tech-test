@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyCompany", "AnyCompany\AnyCompany.csproj", "{C7E15594-7D8F-4C18-9DD7-14F3FBB1572D}"
 EndProject
@@ -11,6 +11,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Instructions.txt = Instructions.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database Scaffolding Scripts", "Database Scaffolding Scripts", "{0372EDAB-809E-4632-A929-146E339E9EB0}"
+	ProjectSection(SolutionItems) = preProject
+		AddCustomers.sql = AddCustomers.sql
+		AddOrders.sql = AddOrders.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Service Layer", "1. Service Layer", "{25F15798-EF39-43DD-B9A8-11DA2D8EB5EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Tests", "2. Tests", "{118DE10D-B767-428F-B9D3-3987DF71146A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyCompany.IntegrationTests", "AnyCompany.IntegrationTests\AnyCompany.IntegrationTests.csproj", "{DF80D016-3AFE-43B3-BC8F-3CEC313B4C91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +38,18 @@ Global
 		{CD5D577E-BDC9-4DFC-AC6A-B1DA474995F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5D577E-BDC9-4DFC-AC6A-B1DA474995F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD5D577E-BDC9-4DFC-AC6A-B1DA474995F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF80D016-3AFE-43B3-BC8F-3CEC313B4C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF80D016-3AFE-43B3-BC8F-3CEC313B4C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF80D016-3AFE-43B3-BC8F-3CEC313B4C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF80D016-3AFE-43B3-BC8F-3CEC313B4C91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C7E15594-7D8F-4C18-9DD7-14F3FBB1572D} = {25F15798-EF39-43DD-B9A8-11DA2D8EB5EB}
+		{CD5D577E-BDC9-4DFC-AC6A-B1DA474995F3} = {118DE10D-B767-428F-B9D3-3987DF71146A}
+		{DF80D016-3AFE-43B3-BC8F-3CEC313B4C91} = {118DE10D-B767-428F-B9D3-3987DF71146A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D629674-23F9-49DA-971E-77A5D7A7C39D}
