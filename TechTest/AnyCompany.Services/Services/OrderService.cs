@@ -4,9 +4,8 @@ using AnyCompany.Services.Dtos;
 using AnyCompany.Services.Exceptions;
 using AnyCompany.Services.Helpers;
 using AnyCompany.Services.Mappers;
-using AnyCompany.Services.Services;
 
-namespace AnyCompany.Services
+namespace AnyCompany.Services.Services
 {
     public class OrderService : IOrderService
     {

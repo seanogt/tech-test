@@ -45,7 +45,7 @@
     <Compile Include="Exceptions\CustomerNotFoundException.cs" />
     <Compile Include="Helpers\VatCalculator.cs" />
     <Compile Include="Mappers\OrderMapper.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOrderService.cs" />
   </ItemGroup>
