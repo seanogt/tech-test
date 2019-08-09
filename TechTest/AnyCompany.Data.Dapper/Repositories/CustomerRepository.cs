@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using AnyCompany.Models;
 
-namespace AnyCompany
+namespace AnyCompany.Data.Dapper.Repositories
 {
     public static class CustomerRepository
     {

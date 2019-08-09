@@ -1,7 +1,10 @@
 ﻿using System;
+using AnyCompany.IntegrationTests.Bootstrap;
 using AnyCompany.IntegrationTests.DataHelpers;
 using AnyCompany.Models;
 using AnyCompany.Services.Dtos;
+using AnyCompany.Services.Services;
+using Castle.Windsor;
 using NUnit.Framework;
 
 namespace AnyCompany.IntegrationTests
@@ -9,6 +12,14 @@ namespace AnyCompany.IntegrationTests
     [TestFixture]
     public class OrderServiceIntegrationTests
     {
+        private IWindsorContainer _container;
+
+        [SetUp]
+        public void SetupFixture()
+        {
+            _container = Bootstrapper.GetContainer();
+        }
+
         [TestCase("UK")]
         [TestCase("FR")]
         public void PlaceOrder_ShouldInsertAnOrder_AndReturnTrue(string country)
@@ -16,7 +27,7 @@ namespace AnyCompany.IntegrationTests
             // Arrange.
             var customer = CustomerDataHelper.Add(GetCustomer(country));
             var order = GetOrderDto();
-            var orderService = new OrderService();
+            var orderService = _container.Resolve<IOrderService>();
 
             // Act.
             var result = orderService.PlaceOrder(order, customer.CustomerId);

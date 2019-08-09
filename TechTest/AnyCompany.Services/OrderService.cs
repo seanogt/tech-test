@@ -1,16 +1,25 @@
-﻿using AnyCompany.Models;
+﻿using AnyCompany.Data.Contract.Repositories;
+using AnyCompany.Models;
 using AnyCompany.Services.Dtos;
 using AnyCompany.Services.Mappers;
+using AnyCompany.Services.Services;
 
-namespace AnyCompany
+namespace AnyCompany.Services
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+        private readonly IOrderRepository _orderRepository;
+        private readonly ICustomerRepository _customerRepository;
+
+        public OrderService(IOrderRepository orderRepository, ICustomerRepository customerRepository)
+        {
+            _orderRepository = orderRepository;
+            _customerRepository = customerRepository;
+        }
 
         public bool PlaceOrder(OrderDto orderDto, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            Customer customer = _customerRepository.Load(customerId);
 
             if (orderDto.Amount == 0)
                 return false;
@@ -20,7 +29,10 @@ namespace AnyCompany
             else
                 orderDto.VAT = 0;
 
-            orderRepository.Save(OrderMapper.Map(orderDto));
+            var order = OrderMapper.Map(orderDto);
+            order.CustomerId = customerId;
+
+            _orderRepository.Add(order);
 
             return true;
         }

@@ -1,9 +1,10 @@
 ﻿using System.Data.SqlClient;
+using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Models;
 
-namespace AnyCompany
+namespace AnyCompany.Data.Dapper.Repositories
 {
-    internal class OrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
@@ -23,5 +24,9 @@ namespace AnyCompany
             connection.Close();
         }
 
+        public void Add(Order order)
+        {
+            Save(order); // TODO just a proxy for now
+        }
     }
 }

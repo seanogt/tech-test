@@ -2,7 +2,7 @@
 
 namespace AnyCompany.Services.Services
 {
-    interface IOrderService
+    public interface IOrderService
     {
         bool PlaceOrder(OrderDto order, int customerId);
     }
