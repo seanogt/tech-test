@@ -1,7 +1,7 @@
 ﻿using System;
-using AnyCompany.Dtos;
 using AnyCompany.IntegrationTests.DataHelpers;
 using AnyCompany.Models;
+using AnyCompany.Services.Dtos;
 using NUnit.Framework;
 
 namespace AnyCompany.IntegrationTests

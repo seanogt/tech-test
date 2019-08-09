@@ -1,7 +1,7 @@
-﻿using AnyCompany.Dtos;
-using AnyCompany.Models;
+﻿using AnyCompany.Models;
+using AnyCompany.Services.Dtos;
 
-namespace AnyCompany.Mappers
+namespace AnyCompany.Services.Mappers
 {
     public static class OrderMapper
     {

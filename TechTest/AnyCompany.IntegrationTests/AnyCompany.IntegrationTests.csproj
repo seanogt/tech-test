@@ -72,9 +72,9 @@
       <Project>{695D4D06-2336-4B91-BA68-4A4924CF4729}</Project>
       <Name>AnyCompany.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AnyCompany\AnyCompany.csproj">
-      <Project>{C7E15594-7D8F-4C18-9DD7-14F3FBB1572D}</Project>
-      <Name>AnyCompany</Name>
+    <ProjectReference Include="..\AnyCompany.Services\AnyCompany.Services.csproj">
+      <Project>{c7e15594-7d8f-4c18-9dd7-14f3fbb1572d}</Project>
+      <Name>AnyCompany.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

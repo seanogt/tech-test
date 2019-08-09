@@ -1,6 +1,6 @@
-﻿using AnyCompany.Dtos;
+﻿using AnyCompany.Services.Dtos;
 
-namespace AnyCompany.Services
+namespace AnyCompany.Services.Services
 {
     interface IOrderService
     {

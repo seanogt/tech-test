@@ -1,4 +1,4 @@
-﻿namespace AnyCompany.Dtos
+﻿namespace AnyCompany.Services.Dtos
 {
     public class OrderDto
     {

@@ -1,6 +1,6 @@
-﻿using AnyCompany.Dtos;
-using AnyCompany.Mappers;
-using AnyCompany.Models;
+﻿using AnyCompany.Models;
+using AnyCompany.Services.Dtos;
+using AnyCompany.Services.Mappers;
 
 namespace AnyCompany
 {
