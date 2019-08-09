@@ -1,6 +1,6 @@
 ﻿using System;
-using AnyCompany.IntegrationTests.Bootstrap;
 using AnyCompany.IntegrationTests.DataHelpers;
+using AnyCompany.Ioc;
 using AnyCompany.Models;
 using AnyCompany.Services.Dtos;
 using AnyCompany.Services.Services;

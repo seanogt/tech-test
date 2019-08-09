@@ -1,14 +1,14 @@
 ﻿using Castle.Windsor;
 
-namespace AnyCompany.IntegrationTests.Bootstrap
+namespace AnyCompany.Ioc
 {
-    internal static class Bootstrapper
+    public static class Bootstrapper
     {
         private static object _objLock = new object();
 
         private static WindsorContainer _container;
 
-        internal static WindsorContainer GetContainer()
+        public static WindsorContainer GetContainer()
         {
             if (_container != null)
                 return _container;
@@ -19,7 +19,7 @@ namespace AnyCompany.IntegrationTests.Bootstrap
                     return _container;
 
                 var container = new WindsorContainer();
-                container.Install(new IntegrationTestInstaller());
+                container.Install(new DependencyInstaller());
 
                 _container = container;
                 return _container;

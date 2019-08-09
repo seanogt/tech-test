@@ -2,16 +2,15 @@
 using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Data.Dapper.Factories;
 using AnyCompany.Data.Dapper.Repositories;
-using AnyCompany.Services;
 using AnyCompany.Services.Services;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace AnyCompany.IntegrationTests.Bootstrap
+namespace AnyCompany.Ioc
 {
-    public class IntegrationTestInstaller : IWindsorInstaller
+    public class DependencyInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
