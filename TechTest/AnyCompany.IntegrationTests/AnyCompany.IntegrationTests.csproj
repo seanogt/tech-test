@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerServiceIntegrationTests.cs" />
     <Compile Include="DataHelpers\CustomerDataHelper.cs" />
     <Compile Include="DataHelpers\OrderDataHelper.cs" />
     <Compile Include="OrderServiceIntegrationTests.cs" />

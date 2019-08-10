@@ -18,6 +18,9 @@ namespace AnyCompany.Ioc
                 Component.For<IOrderService, OrderService>());
 
             container.Register(
+                Component.For<ICustomerOrderService, CustomerOrderService>());
+
+            container.Register(
                 Component.For<IOrderRepository, OrderRepository>());
 
             container.Register(

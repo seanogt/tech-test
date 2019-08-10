@@ -2,6 +2,7 @@
 using AnyCompany.IntegrationTests.DataHelpers;
 using AnyCompany.Ioc;
 using AnyCompany.Models;
+using AnyCompany.Services.Constants;
 using AnyCompany.Services.Dtos;
 using AnyCompany.Services.Services;
 using Castle.Windsor;
@@ -20,9 +21,9 @@ namespace AnyCompany.IntegrationTests
             _container = Bootstrapper.GetContainer();
         }
 
-        [TestCase("UK")]
-        [TestCase("FR")]
-        public void PlaceOrder_ShouldInsertAnOrder_AndReturnTrue(string country)
+        [TestCase("UK", VatConstants.UkVat)]
+        [TestCase("FR", VatConstants.RowVat)]
+        public void PlaceOrder_ShouldInsertAnOrder_AndReturnTrue(string country, double expectedVat)
         {
             // Arrange.
             var customer = CustomerDataHelper.Add(GetCustomer(country));
@@ -36,14 +37,18 @@ namespace AnyCompany.IntegrationTests
             // Assert.
             Assert.IsTrue(result);
             Assert.IsNotNull(insertedOrder);
+            Assert.AreEqual(customer.CustomerId, insertedOrder.CustomerId);
+            Assert.AreEqual(order.OrderId, insertedOrder.OrderId);
+            Assert.AreEqual(order.Amount, insertedOrder.Amount);
+            Assert.AreEqual(expectedVat, insertedOrder.VAT);
         }
 
         private OrderDto GetOrderDto()
         {
             return new OrderDto
             {
-                OrderId = new Random().Next(1, 2000000), // generate a random Id since the OrderId column is not an IDENTITY column
-                Amount = 200.99
+                OrderId = new Random().Next(1, 200000000), // generate a random Id since the OrderId column is not an IDENTITY column
+                Amount = 200.99d
             };
         }
 
@@ -52,7 +57,7 @@ namespace AnyCompany.IntegrationTests
             return new Customer
             {
                 Country = country,
-                DateOfBirth = DateTime.UtcNow.AddDays(-20),
+                DateOfBirth = DateTime.UtcNow.AddYears(-41),
                 Name = "John Smith"
             };
         }

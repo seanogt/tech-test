@@ -10,8 +10,8 @@ BEGIN
     CREATE TABLE [dbo].[Orders]
 	(
 		[OrderId] INT NOT NULL PRIMARY KEY, 
-		[Amount] DECIMAL NOT NULL,
-		[VAT] DECIMAL NOT NULL
+		[Amount] DECIMAL(10, 2) NOT NULL,
+		[VAT] DECIMAL(10, 2) NOT NULL
 	)
 END
 

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Data.Dapper.Enums;
 using AnyCompany.Data.Dapper.Factories;
@@ -18,7 +20,7 @@ namespace AnyCompany.Data.Dapper.Repositories
 
         public void Add(Order order)
         {
-            using (var connection = _connectionFactory.Create(ConnectionType.OrderDb))
+            using (var connection = CreateConnection())
             {
                 connection.Open();
                 connection.Execute(@"INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT, @CustomerId)",
@@ -34,7 +36,16 @@ namespace AnyCompany.Data.Dapper.Repositories
 
         public IEnumerable<Order> GetList()
         {
-            throw new System.NotImplementedException();
+            using (var connection = CreateConnection())
+            {
+                connection.Open();
+                return connection.Query<Order>("SELECT OrderId, Amount, VAT, CustomerId from dbo.Orders").ToList();
+            }
+        }
+
+        private IDbConnection CreateConnection()
+        {
+            return _connectionFactory.Create(ConnectionType.OrderDb);
         }
     }
 }
