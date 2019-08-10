@@ -3,6 +3,7 @@ using System.Linq;
 using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Data.Dapper.Enums;
 using AnyCompany.Data.Dapper.Factories;
+using AnyCompany.Data.Dapper.Sql;
 using AnyCompany.Models;
 using Dapper;
 
@@ -10,7 +11,7 @@ namespace AnyCompany.Data.Dapper.Repositories
 {
     public class CustomerRepositoryWrapper : ICustomerRepository
     {
-        private IConnectionFactory _connectionFactory;
+        private readonly IConnectionFactory _connectionFactory;
 
         public CustomerRepositoryWrapper(IConnectionFactory connectionFactory)
         {
@@ -29,7 +30,7 @@ namespace AnyCompany.Data.Dapper.Repositories
             using (var connection = _connectionFactory.Create(ConnectionType.CustomerDb))
             {
                 connection.Open();
-                return connection.Query<Customer>("SELECT CustomerId, Country, DateOfBirth, Name from dbo.Customer").ToList();
+                return connection.Query<Customer>(SqlStatements.GetAllCustomers).ToList();
             }
         }
     }

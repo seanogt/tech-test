@@ -25,6 +25,7 @@ namespace AnyCompany.Services.Services
             var customers = _customerRepository.GetList();
             var orders = _orderRepository.GetList();
 
+            // map orders to the appropriate customer and return a dto
             foreach (var customer in customers)
             {
                 var customerOrderDto = new CustomerOrdersDto

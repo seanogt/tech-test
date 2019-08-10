@@ -4,6 +4,7 @@ using System.Linq;
 using AnyCompany.Data.Contract.Repositories;
 using AnyCompany.Data.Dapper.Enums;
 using AnyCompany.Data.Dapper.Factories;
+using AnyCompany.Data.Dapper.Sql;
 using AnyCompany.Models;
 using Dapper;
 
@@ -23,7 +24,7 @@ namespace AnyCompany.Data.Dapper.Repositories
             using (var connection = CreateConnection())
             {
                 connection.Open();
-                connection.Execute(@"INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT, @CustomerId)",
+                connection.Execute(SqlStatements.InsertOrder,
                     new
                     {
                         OrderId = order.OrderId,
@@ -39,7 +40,7 @@ namespace AnyCompany.Data.Dapper.Repositories
             using (var connection = CreateConnection())
             {
                 connection.Open();
-                return connection.Query<Order>("SELECT OrderId, Amount, VAT, CustomerId from dbo.Orders").ToList();
+                return connection.Query<Order>(SqlStatements.GetAllOrders).ToList();
             }
         }
 

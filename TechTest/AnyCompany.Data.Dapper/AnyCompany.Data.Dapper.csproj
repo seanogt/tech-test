@@ -52,6 +52,11 @@
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\CustomerRepositoryWrapper.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Sql\SqlStatements.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlStatements.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyCompany.Data.Contract\AnyCompany.Data.Contract.csproj">
@@ -65,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\SqlStatements.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqlStatements.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

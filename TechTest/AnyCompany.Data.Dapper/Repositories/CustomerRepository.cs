@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using AnyCompany.Data.Dapper.Sql;
 using AnyCompany.Models;
 using Dapper;
 
@@ -14,7 +15,7 @@ namespace AnyCompany.Data.Dapper.Repositories
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                return connection.Query<Customer>("SELECT * FROM Customer WHERE CustomerId = @CustomerId",
+                return connection.Query<Customer>(SqlStatements.LoadCustomerById,
                     new {CustomerId = customerId}).FirstOrDefault();
             }
         }
