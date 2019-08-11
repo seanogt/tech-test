@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Services
 {
-    class IOrderService
+    public interface IOrderService
     {
+        bool PlaceOrder(Order order, int customerId);
     }
 }
