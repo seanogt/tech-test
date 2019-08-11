@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6D3C1BB-2A37-4E17-9EE3-DEF28286E782}"
 	ProjectSection(SolutionItems) = preProject
 		Instructions.txt = Instructions.txt
+		SolutionSummary.txt = SolutionSummary.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyCompany.Abstractions", "AnyCompany.Abstractions\AnyCompany.Abstractions.csproj", "{CA267EE7-6F9B-4DE8-B8B4-9FA61B4CDAB8}"

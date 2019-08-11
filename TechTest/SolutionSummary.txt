@@ -1,0 +1,12 @@
+I have done the following refactories to the AnyCompany solution:
+
+1. Replace the existing SqlClient code with Entity Framework 6, created seperate project for DBContext and services.
+2. Created Interface for OrderRepository and OrderService and moved it to a seperate project.
+3. Moved domain models to a seperate project.
+4. Implemented StructionMap as Ioc framework.
+5. Added console app for the client that consume the service.
+6. Replaced AnyCompany.Test project with Unit test project, in which use Moq and FluentAssertions.
+7. Removed AnyCompany project from solution.
+
+if I had more time, I could have tried to firgure out a better way to deal with the staic CustomerRepository.
+ 

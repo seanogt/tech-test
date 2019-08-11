@@ -14,15 +14,14 @@ namespace AnyCompany.Client
         {
             var container = Container.For<ClientRegistry>();
 
+            //below Save customer is not required, for testing purpose
             var customer = new Customer
             {
                 Country = "UK",
                 DateOfBirth = DateTime.Now.AddYears(-20),
                 Name = "tester2"
             };
-
             var orderRepository = container.GetInstance<IOrderRepository>();
-
             orderRepository.Save(customer);
 
             var order = new Order
