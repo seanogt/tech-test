@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace ADO
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
+        private string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
-        public static Customer Load(int customerId)
+        public Customer Load(int customerId)
         {
             Customer customer = new Customer();
             SqlConnection connection = new SqlConnection(ConnectionString);
