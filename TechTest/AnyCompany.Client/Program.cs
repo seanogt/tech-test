@@ -21,22 +21,21 @@ namespace AnyCompany.Client
                 Name = "tester2"
             };
 
-            var app1 = container.GetInstance<IOrderRepository>();
+            var orderRepository = container.GetInstance<IOrderRepository>();
 
-            app1.Save(customer);
+            orderRepository.Save(customer);
 
             var order = new Order
             {
-                Amount = 12,
-                VAT = 2
+                Amount = 120.0
             };
             Console.WriteLine("Placing an order for customer id 1. ");
-            var app = container.GetInstance<OrderService>();
-            app.PlaceOrder(order, 1);
+            var orderService = container.GetInstance<OrderService>();
+            orderService.PlaceOrder(order, 1);
 
             Console.WriteLine("Getting all customers and their linked orders. ");
-            var orders = app.GetAlOrders().ToList();
-            var customers = app.GetAlCustomers().ToList();
+            var orders = orderService.GetAlOrders().ToList();
+            var customers = orderService.GetAlCustomers().ToList();
 
             foreach (var item in customers)
             {
@@ -69,7 +68,6 @@ namespace AnyCompany.Client
     {
         public ClientRegistry()
         {
-
             Scan(scan =>
             {
                 scan.TheCallingAssembly();
