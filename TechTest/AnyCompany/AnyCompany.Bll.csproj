@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,12 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnyCompany.DAL\AnyCompany.Dal.csproj">
+      <Project>{b50485fc-1bc4-4a50-b34d-a9ebd1c3efc1}</Project>
+      <Name>AnyCompany.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnyCompany.Domain\AnyCompany.Domain.csproj">
+      <Project>{e836147f-f02f-463d-8b61-abd47de3efdc}</Project>
+      <Name>AnyCompany.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
