@@ -2,7 +2,7 @@
 {
     public class OrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+        private readonly OrderRepository orderRepository1=new OrderRepository();
 
         public bool PlaceOrder(Order order, int customerId)
         {
@@ -16,7 +16,7 @@
             else
                 order.VAT = 0;
 
-            orderRepository.Save(order);
+            orderRepository1.Save(order);
 
             return true;
         }
