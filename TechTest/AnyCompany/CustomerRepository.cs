@@ -5,7 +5,7 @@ namespace AnyCompany
 {
     public static class CustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
+        private static string ConnectionString = @"Data Source=DESKTOP-21TVJEC;Initial Catalog=AnyCompany;Integrated Security=True;Persist Security Info=False;Enlist=False;Pooling=True;Min Pool Size=1;Max Pool Size=100;Connect Timeout=15;User Instance=False";//ConfigurationSettings.AppSettings["AnyCompany"].ToString();//@"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
         public static Customer Load(int customerId)
         {
@@ -29,5 +29,6 @@ namespace AnyCompany
 
             return customer;
         }
+      
     }
 }
