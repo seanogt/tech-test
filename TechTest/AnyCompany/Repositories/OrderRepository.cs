@@ -3,8 +3,15 @@ using System.Data.SqlClient;
 
 namespace AnyCompany.Repositories
 {
+    /// <summary>
+    /// This is the OrderRepository Repository, responsible for managing customer persistance and retrieval.
+    /// </summary>
     internal class OrderRepository
     {
+        /// <summary>
+        /// This stores an Order object.
+        /// </summary>
+        /// <param name="order">The order information.</param>
         public void Save(Order order)
         {
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.OrderConnectionString);

@@ -2,6 +2,9 @@
 
 namespace AnyCompany.Models
 {
+    /// <summary>
+    /// This is the Customer Model
+    /// </summary>
     public class Customer
     {
         public string Country { get; set; }

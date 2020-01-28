@@ -1,5 +1,8 @@
 ﻿namespace AnyCompany.Models
 {
+    /// <summary>
+    /// This is the Order Model
+    /// </summary>
     public class Order
     {
         public int OrderId { get; set; }

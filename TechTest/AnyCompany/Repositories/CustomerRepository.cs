@@ -4,8 +4,15 @@ using System.Data.SqlClient;
 
 namespace AnyCompany.Repositories
 {
+    /// <summary>
+    /// This is the Customer Repository, responsible for managing customer persistance and retrieval.
+    /// </summary>
     public static class CustomerRepository
     {
+        /// <summary>
+        /// This loads a Customer object.
+        /// </summary>
+        /// <param name="customerId">The Id of the customer this order is placed agains.</param>
         public static Customer Load(int customerId)
         {
             Customer customer = new Customer();
