@@ -2,6 +2,7 @@
 using AnyCompany.Models;
 using AnyCompany.Repositories;
 using System;
+using System.Collections.Generic;
 
 namespace AnyCompany.Services
 {
@@ -32,6 +33,21 @@ namespace AnyCompany.Services
             orderRepository.Save(order);
 
             return true;
+        }
+
+        public List<Customer> ListCustomers()
+        {
+            // Fetch all customers from the customer database
+            List<Customer> customers = CustomerRepository.GetAll();
+
+            // Now, fetch all orders for each customer from the orders database
+            // This method is slow due to a unique call per customer. A future update should perhaps investigate passing a list of customers, and splitting in memory after retrieval.
+            foreach (Customer customer in customers)
+            {
+                customer.Orders = orderRepository.GetAllByCustomerId(customer.CustomerId);
+            }
+
+            return customers;
         }
     }
 }
