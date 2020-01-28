@@ -1,7 +1,8 @@
-﻿using System;
+﻿using AnyCompany.Models;
+using System;
 using System.Data.SqlClient;
 
-namespace AnyCompany
+namespace AnyCompany.Repositories
 {
     public static class CustomerRepository
     {
