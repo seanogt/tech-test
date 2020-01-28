@@ -1,5 +1,6 @@
 ﻿using AnyCompany.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace AnyCompany.Repositories
@@ -37,6 +38,33 @@ namespace AnyCompany.Repositories
             connection.Close();
 
             return customer;
+        }
+
+        public static List<Customer> GetAll()
+        {
+            List<Customer> customers = new List<Customer>();
+
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.CustomerConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand("SELECT * FROM Customer", connection);
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                customers.Add(new Customer()
+                {
+                    CustomerId = int.Parse(reader["CustomerId"].ToString()),
+                    Name = reader["Name"].ToString(),
+                    DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString()),
+                    Country = reader["Country"].ToString()
+                });
+            }
+
+            connection.Close();
+
+            return customers;
         }
     }
 }
