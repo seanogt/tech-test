@@ -1,21 +1,22 @@
-﻿namespace AnyCompany
+﻿using System;
+using AnyCompany.Interface;
+
+namespace AnyCompany
 {
     public class OrderService
     {
         private readonly OrderRepository orderRepository = new OrderRepository();
 
-        public bool PlaceOrder(Order order, int customerId)
+        public bool PlaceOrder(IOrder order, Guid customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            var customer = CustomerRepository.Load(customerId);
 
-            if (order.Amount == 0)
+            if (order.Amount < 0.0)
                 return false;
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+            order.VAT = customer.Country == "UK" ? Properties.Settings.Default.ukVat : Properties.Settings.Default.otherVat;
 
+            order.CustomerId = customerId;
             orderRepository.Save(order);
 
             return true;
