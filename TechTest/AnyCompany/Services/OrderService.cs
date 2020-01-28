@@ -35,16 +35,19 @@ namespace AnyCompany.Services
             return true;
         }
 
-        public List<Customer> ListCustomers()
+        public List<Customer> ListCustomers(bool includeOrders)
         {
             // Fetch all customers from the customer database
             List<Customer> customers = CustomerRepository.GetAll();
 
             // Now, fetch all orders for each customer from the orders database
             // This method is slow due to a unique call per customer. A future update should perhaps investigate passing a list of customers, and splitting in memory after retrieval.
-            foreach (Customer customer in customers)
+            if (includeOrders)
             {
-                customer.Orders = orderRepository.GetAllByCustomerId(customer.CustomerId);
+                foreach (Customer customer in customers)
+                {
+                    customer.Orders = orderRepository.GetAllByCustomerId(customer.CustomerId);
+                }
             }
 
             return customers;
