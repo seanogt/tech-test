@@ -1,4 +1,5 @@
-﻿using AnyCompany.Models;
+﻿using AnyCompany.Helpers;
+using AnyCompany.Models;
 using AnyCompany.Repositories;
 
 namespace AnyCompany.Services
@@ -14,10 +15,7 @@ namespace AnyCompany.Services
             if (order.Amount == 0)
                 return false;
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+            order.VAT = VatHelper.GetVatRateByCountry(customer.Country);
 
             orderRepository.Save(order);
 
