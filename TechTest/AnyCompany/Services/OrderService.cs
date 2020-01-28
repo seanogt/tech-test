@@ -1,6 +1,7 @@
 ﻿using AnyCompany.Helpers;
 using AnyCompany.Models;
 using AnyCompany.Repositories;
+using System;
 
 namespace AnyCompany.Services
 {
@@ -20,11 +21,14 @@ namespace AnyCompany.Services
         {
             Customer customer = CustomerRepository.Load(customerId);
 
+            if (customer == null)
+                throw new ArgumentException("Customer could not be loaded. Invalid customer Id.");
+
             if (order.Amount == 0)
                 return false;
 
             order.VAT = VatHelper.GetVatRateByCountry(customer.Country);
-
+            order.CustomerId = customer.CustomerId;
             orderRepository.Save(order);
 
             return true;

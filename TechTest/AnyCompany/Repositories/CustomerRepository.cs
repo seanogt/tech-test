@@ -28,6 +28,7 @@ namespace AnyCompany.Repositories
 
             while (reader.Read())
             {
+                customer.CustomerId = int.Parse(reader["CustomerId"].ToString());
                 customer.Name = reader["Name"].ToString();
                 customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                 customer.Country = reader["Country"].ToString();
