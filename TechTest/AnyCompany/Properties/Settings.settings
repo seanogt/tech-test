@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AnyCompany.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="connCustomers" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=(local);Database=Customers;User Id=admin;Password=password;</Value>
+    </Setting>
+    <Setting Name="ukVat" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">0.2</Value>
+    </Setting>
+    <Setting Name="otherVat" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="connOrders" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=(local);Database=Orders;User Id=admin;Password=password</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
