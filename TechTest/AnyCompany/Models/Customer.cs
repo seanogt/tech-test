@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AnyCompany.Models
 {
@@ -14,5 +15,12 @@ namespace AnyCompany.Models
         public DateTime DateOfBirth { get; set; }
 
         public string Name { get; set; }
+
+        public List<Order> Orders { get; set; }
+
+        public Customer()
+        {
+            Orders = new List<Order>();
+        }
     }
 }
