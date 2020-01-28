@@ -6,13 +6,11 @@ namespace AnyCompany.Repositories
 {
     public static class CustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
-
         public static Customer Load(int customerId)
         {
             Customer customer = new Customer();
 
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.CustomerConnectionString);
             connection.Open();
 
             SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AnyCompany.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="OrderConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=(local);Database=Orders;User Id=admin;Password=password;</Value>
+    </Setting>
+    <Setting Name="CustomerConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=(local);Database=Customers;User Id=admin;Password=password;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

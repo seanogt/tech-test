@@ -5,11 +5,9 @@ namespace AnyCompany.Repositories
 {
     internal class OrderRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
-
         public void Save(Order order)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.OrderConnectionString);
             connection.Open();
 
             SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
