@@ -13,8 +13,10 @@ namespace AnyCompany.Repositories
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.CustomerConnectionString);
             connection.Open();
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
-                connection);
+            SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = @CustomerId", connection);
+
+            command.Parameters.AddWithValue("@CustomerId", customerId);
+
             var reader = command.ExecuteReader();
 
             while (reader.Read())
