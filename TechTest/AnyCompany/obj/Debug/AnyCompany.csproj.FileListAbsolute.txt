@@ -1,0 +1,5 @@
+C:\Users\Dinesh Sookdeyu\source\Psybergate\tech-test-master\tech-test-master\TechTest\AnyCompany\obj\Debug\AnyCompany.csproj.CoreCompileInputs.cache
+C:\Users\Dinesh Sookdeyu\source\Psybergate\tech-test-master\tech-test-master\TechTest\AnyCompany\bin\Debug\AnyCompany.dll
+C:\Users\Dinesh Sookdeyu\source\Psybergate\tech-test-master\tech-test-master\TechTest\AnyCompany\bin\Debug\AnyCompany.pdb
+C:\Users\Dinesh Sookdeyu\source\Psybergate\tech-test-master\tech-test-master\TechTest\AnyCompany\obj\Debug\AnyCompany.dll
+C:\Users\Dinesh Sookdeyu\source\Psybergate\tech-test-master\tech-test-master\TechTest\AnyCompany\obj\Debug\AnyCompany.pdb
