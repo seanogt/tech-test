@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AnyCompany
+namespace AnyCompany.Models
 {
     public class Customer
     {
