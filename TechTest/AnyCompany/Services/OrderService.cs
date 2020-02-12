@@ -15,9 +15,9 @@ namespace AnyCompany.Services
                 return false;
 
             if (customer.Country == "UK")
-                order.VAT = 0.2d;
+                order.Vat = 0.2d;
             else
-                order.VAT = 0;
+                order.Vat = 0;
 
             orderRepository.Save(order);
 
