@@ -9,7 +9,7 @@ namespace AnyCompany.Services
 
         public bool PlaceOrder(Order order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            Customer customer = CustomerRepository.Get(customerId);
 
             if (order.Amount == 0)
                 return false;
@@ -19,7 +19,7 @@ namespace AnyCompany.Services
             else
                 order.Vat = 0;
 
-            orderRepository.Save(order);
+            orderRepository.Add(order);
 
             return true;
         }
