@@ -37,7 +37,7 @@ namespace AnyCompany.Features.Customers
         }
     }
 
-    public class Handler : IRequestHandler<Command>
+    public class Handler : IRequestHandler<AddCommand>
     {
         //todo: add tests
         public void Handle(Command message)
