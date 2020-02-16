@@ -8,27 +8,48 @@ namespace AnyCompany.Repositories
     {
         private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
-        public static Customer Load(int customerId)
+        public static Customer Get(int customerId)
         {
-            Customer customer = new Customer();
-
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
-
-            SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
-                connection);
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
+            using (var connection = new SqlConnection(ConnectionString))
             {
-                customer.Name = reader["Name"].ToString();
-                customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Country = reader["Country"].ToString();
+                connection.Open();
+
+                var command = new SqlCommand(
+                    "SELECT * FROM Customer WHERE CustomerId = " + customerId,
+                    connection
+                );
+
+                var reader = command.ExecuteReader();
+
+                var customer = new Customer();
+
+                while (reader.Read())
+                {
+                    customer.Name = reader["Name"].ToString();
+                    customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+                    customer.Country = reader["Country"].ToString();
+                }
+
+                connection.Close();
+
+                return customer;
+            }
+        }
+
+        public static void Add(Customer customer)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand("INSERT INTO Customer VALUES (@Name, @DateOfBirth, @Country)", connection);
+
+                command.Parameters.AddWithValue("@OrderId", customer.Name);
+                command.Parameters.AddWithValue("@Amount", customer.DateOfBirth);
+                command.Parameters.AddWithValue("@VAT", customer.Country);
+
+                command.ExecuteNonQuery();
             }
 
-            connection.Close();
-
-            return customer;
         }
     }
 }
