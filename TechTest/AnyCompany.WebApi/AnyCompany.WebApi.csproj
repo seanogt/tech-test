@@ -14,4 +14,8 @@
     <ProjectReference Include="..\AnyCompany\AnyCompany.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\jquery-1.12.4.min.js" />
+  </ItemGroup>
+
 </Project>
