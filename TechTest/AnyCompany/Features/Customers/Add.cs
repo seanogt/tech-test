@@ -1,10 +1,14 @@
 ﻿using AnyCompany.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AnyCompany.Repositories;
+using FluentValidation;
+using MediatR;
+using System.Threading;
 
 namespace AnyCompany.Features.Customers
 {
@@ -26,21 +30,20 @@ namespace AnyCompany.Features.Customers
 
     public class Validator : AbstractValidator<AddCommand>
     {
-        public Validator(DataContext context)
+        public Validator()
         {
             RuleFor(command => command.Name)
                 .NotEmpty()
-                .Must(name => NameValidator.ValidateName(name, Collection.AllowedNameCharacters))
-                .WithMessage(Collection.AllowedNameCharactersMessage)
-                .Must(name => !context.Collections.Any(c => c.Name == name))
-                .WithMessage(ValidationMessages.Collection.AlreadyExists);
+                .Matches(@"")
+                .Length(50);
+            //todo: add `Must not exists` validation
         }
     }
 
     public class Handler : IRequestHandler<AddCommand>
     {
         //todo: add tests
-        public void Handle(Command message)
+        public Task<Unit> Handle(AddCommand message, CancellationToken cancellationToken)
         {
             var customer = new Customer
             {
@@ -50,6 +53,8 @@ namespace AnyCompany.Features.Customers
             };
 
             CustomerRepository.Add(customer);
+
+            return Unit.Task;
         }
     }
 }

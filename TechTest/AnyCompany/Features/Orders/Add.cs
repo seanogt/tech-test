@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AnyCompany.Models;
 using AnyCompany.Repositories;
 using AnyCompany.Services;
+using FluentValidation;
+using MediatR;
 
 namespace AnyCompany.Features.Orders
 {
@@ -17,10 +20,11 @@ namespace AnyCompany.Features.Orders
 
     public class Validator : AbstractValidator<AddCommand>
     {
-        public Validator(DataContext context)
+        public Validator()
         {
-            //validate user id
-            //validate product id
+            //todo
+            //validate user id - must exists
+            //validate product id - must exits
         }
     }
 
@@ -34,7 +38,7 @@ namespace AnyCompany.Features.Orders
         }
 
         //todo: add tests
-        public void Handle(Command message)
+        public Task<Unit> Handle(AddCommand message, CancellationToken cancellationToken)
         {
             var order = new Order
             {
@@ -43,6 +47,8 @@ namespace AnyCompany.Features.Orders
             };
 
             _OrderService.PlaceOrder(order, message.CustomerId);
+
+            return Unit.Task;
         }
     }
 }
