@@ -34,7 +34,6 @@ namespace AnyCompany.Features.Customers
         {
             RuleFor(command => command.Name)
                 .NotEmpty()
-                .Matches(@"")
                 .Length(50);
             //todo: add `Must not exists` validation
         }

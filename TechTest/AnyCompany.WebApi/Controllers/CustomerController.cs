@@ -17,6 +17,6 @@ namespace AnyCompany.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task Add(AddCommand command) => await _Mediator.Send(command);
+        public async Task Add([FromForm]AddCommand command) => await _Mediator.Send(command);
     }
 }
