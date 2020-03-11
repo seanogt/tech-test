@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 
 namespace AnyCompany
@@ -20,6 +20,7 @@ namespace AnyCompany
 
             while (reader.Read())
             {
+                customer.CustomerId = Int32.Parse(reader["CustomerId"].ToString());
                 customer.Name = reader["Name"].ToString();
                 customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                 customer.Country = reader["Country"].ToString();
@@ -29,5 +30,6 @@ namespace AnyCompany
 
             return customer;
         }
+
     }
 }
