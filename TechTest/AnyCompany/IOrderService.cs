@@ -1,4 +1,4 @@
-namespace AnyCompany.Utilities
+namespace AnyCompany
 {
     public interface IOrderService
     {
