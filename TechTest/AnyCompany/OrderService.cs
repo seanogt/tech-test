@@ -1,8 +1,12 @@
-﻿namespace AnyCompany
+namespace AnyCompany
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+        IOrderRepository _orderRepository;
+        public OrderService(IOrderRepository orderRepository)
+        {
+            _orderRepository = orderRepository;
+        }
 
         public bool PlaceOrder(Order order, int customerId)
         {
@@ -16,7 +20,7 @@
             else
                 order.VAT = 0;
 
-            orderRepository.Save(order);
+            _orderRepository.Save(order, customerId);
 
             return true;
         }
