@@ -1,24 +1,82 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.Models;
+using AnyCompany.Repository;
+using System;
+using System.Collections.Generic;
+
+namespace AnyCompany
 {
     public class OrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
-
-        public bool PlaceOrder(Order order, int customerId)
+        public bool PlaceOrder(Order order)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            try
+            {
+                Customer customer = CustomerRepository.Load(order.CustomerId);
 
-            if (order.Amount == 0)
+                if (customer != null)
+                {
+                    order.CustomerId = customer.CustomerId;
+
+                    if (order.Amount == 0)
+                        return false;
+
+                    if (customer.Country == "UK")
+                        order.VAT = 0.2d;
+                    else
+                        order.VAT = 0;
+
+                    order = OrderRepository.Save(order);
+
+                    return order?.OrderId > 0;
+                }
+                else
+                {
+                    //To-do: Implement proper error logging
+                    Console.WriteLine("Error : Customer doesn't exist");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                //To-do: Implement proper error logging
+                Console.WriteLine("Error : " + ex.Message);
                 return false;
+            }
+        }
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+        public List<Customer> RetrieveCustomerOrders()
+        {
+            try
+            {
+                List<Customer> customers = CustomerRepository.LoadCollection();
 
-            orderRepository.Save(order);
+                foreach (var customer in customers)
+                {
+                    customer.Orders = OrderRepository.LoadCollection(customer.CustomerId);
+                }
 
-            return true;
+                return customers;
+            }
+            catch (Exception ex)
+            {
+                //To-do: Implement proper error logging
+                Console.WriteLine("Error : " + ex.Message);
+                return new List<Customer>();
+            }
+        }
+
+        public Customer NewCustomer(Customer customer)
+        {
+            try
+            {
+                return CustomerRepository.Save(customer);
+            }
+            catch (Exception ex)
+            {
+                //To-do: Implement proper error logging
+                Console.WriteLine("Error : " + ex.Message);
+                return customer;
+            }
         }
     }
 }
