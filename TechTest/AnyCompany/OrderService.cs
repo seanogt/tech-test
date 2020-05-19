@@ -16,6 +16,7 @@ namespace AnyCompany
                 return false;
             }
 
+
             Customer customer = CustomerRepository.Load(customerId);
 
             order.CustomerID = customer.CustomerID;
