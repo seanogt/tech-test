@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace AnyCompany
 {
@@ -20,6 +22,7 @@ namespace AnyCompany
 
             while (reader.Read())
             {
+                customer.CustomerID = Convert.ToInt32(reader["CustomerID"].ToString());
                 customer.Name = reader["Name"].ToString();
                 customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                 customer.Country = reader["Country"].ToString();
@@ -28,6 +31,87 @@ namespace AnyCompany
             connection.Close();
 
             return customer;
+        }
+
+        public static Customer Save(Customer customer)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+
+                SqlCommand command = new SqlCommand("INSERT INTO Customer (Name, DateOfBirth, Country) OUTPUT INSERTED.CustomerID VALUES (@Name, @DateOfBirth, @Country) ", connection);
+
+                command.Parameters.AddWithValue("@Name", customer.Name);
+                command.Parameters.AddWithValue("@DateOfBirth", customer.DateOfBirth);
+                command.Parameters.AddWithValue("@Country", customer.Country);
+
+                connection.Open();
+
+                customer.CustomerID = (int)command.ExecuteScalar();
+
+            }
+
+            return customer;
+        }
+
+        public static List<CustomerOrder> LoadCustomers()
+        {
+            List<CustomerOrder> customers = new List<CustomerOrder>();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM Customer LEFT JOIN Order ON Customer.CustomerID = Order.CustomerID", connection);
+
+                connection.Open();
+
+                var reader = command.ExecuteReader();
+
+                int customerId = 0;
+
+                while (reader.Read())
+                {
+                    int readerCustId = Convert.ToInt32(reader["CustomerID"]);
+
+                    if (readerCustId == customerId)
+                    {
+                        Customer customer = new Customer()
+                        {
+                            CustomerID = readerCustId,
+                            Name = reader["Name"].ToString(),
+                            DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString()),
+                            Country = reader["Country"].ToString()
+                        };
+
+                        Order order = new Order
+                        {
+                            CustomerID = readerCustId,
+                            OrderId = Convert.ToInt32(reader["OrderId"]),
+                            Amount = Convert.ToDouble(reader["Amount"]),
+                            VAT = Convert.ToDouble(reader["VAT"])
+                        };
+
+
+                        customers.Add(new CustomerOrder
+                        {
+                            Customer = customer,
+                            Orders = new List<Order> { order }
+                        });
+                    }
+                    else
+                    {
+                        customers.Where(c => c.Customer.CustomerID == readerCustId).FirstOrDefault().Orders.Add(new Order
+                        {
+                            CustomerID = readerCustId,
+                            OrderId = Convert.ToInt32(reader["OrderId"]),
+                            Amount = Convert.ToDouble(reader["Amount"]),
+                            VAT = Convert.ToDouble(reader["VAT"])
+                        });
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return customers;
         }
     }
 }
