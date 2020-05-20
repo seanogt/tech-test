@@ -40,11 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Infrastructure\Mocks\CustomerRepositoryMock.cs" />
+    <Compile Include="Infrastructure\Mocks\OrderRepositoryMock.cs" />
+    <Compile Include="Services\Interfaces\ICustomerService.cs" />
+    <Compile Include="Infrastructure\CustomerRepositoryProxy.cs" />
+    <Compile Include="Infrastructure\Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Infrastructure\Interfaces\IOrderRepository.cs" />
+    <Compile Include="Services\Interfaces\IOrderService.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Infrastructure\CustomerRepository.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Infrastructure\OrderRepository.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
