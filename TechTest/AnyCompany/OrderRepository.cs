@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace AnyCompany
 {
@@ -11,8 +13,9 @@ namespace AnyCompany
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
 
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
+            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@CustomerID, @OrderId, @Amount, @VAT)", connection);
 
+            command.Parameters.AddWithValue("@CustomerID", order.CustomerID);
             command.Parameters.AddWithValue("@OrderId", order.OrderId);
             command.Parameters.AddWithValue("@Amount", order.Amount);
             command.Parameters.AddWithValue("@VAT", order.VAT);
@@ -21,5 +24,6 @@ namespace AnyCompany
 
             connection.Close();
         }
+
     }
 }
