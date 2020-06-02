@@ -4,6 +4,6 @@
     {
         public int OrderId { get; set; }
         public double Amount { get; set; }
-        public double VAT { get; set; }
+        internal double VAT { get; set; } //since we set the VAT we do not want to expose it to consuming owners
     }
 }
