@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="DataRepositories\CustomerRepository.cs" />
+    <Compile Include="Models\CustomerOrderModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="DataRepositories\OrderRepository.cs" />
+    <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

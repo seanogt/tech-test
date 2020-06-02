@@ -71,6 +71,7 @@ namespace AnyCompany.DataRepositories
                     while (reader.Read())
                     { 
                         var customer = new CustomerModel();
+                        customer.CustomerId = int.Parse(reader["customerId"].ToString());
                         customer.Name = reader["Name"].ToString();
                         customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                         customer.Country = reader["Country"].ToString();
