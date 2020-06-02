@@ -1,12 +1,15 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.DataRepositories;
+using AnyCompany.Models;
+
+namespace AnyCompany.Services
 {
     public class OrderService
     {
         private readonly OrderRepository orderRepository = new OrderRepository();
 
-        public bool PlaceOrder(Order order, int customerId)
+        public bool PlaceOrder(OrderModel order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            CustomerModel customer = CustomerRepository.Load(customerId);
 
             if (order.Amount == 0)
                 return false;

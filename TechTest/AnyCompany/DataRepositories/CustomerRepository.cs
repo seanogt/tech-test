@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Data.SqlClient;
+using AnyCompany.Models;
 
-namespace AnyCompany
+namespace AnyCompany.DataRepositories
 {
     public static class CustomerRepository
     {
+        //Hardcoding connection strings is not a good idea. This will be better suited in a settings / config file
+        //As this is a class library, we'll skip the idea of moving it into settings, rather, the better idea will be to have the consuming app provide any connection strings necessary
         private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
 
-        public static Customer Load(int customerId)
+
+        public static CustomerModel Load(int customerId)
         {
-            Customer customer = new Customer();
+            CustomerModel customer = new CustomerModel();
 
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();

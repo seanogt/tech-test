@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace AnyCompany
+namespace AnyCompany.Models
 {
-    public class Customer
+    public class CustomerModel
     {
         public string Country { get; set; }
 
