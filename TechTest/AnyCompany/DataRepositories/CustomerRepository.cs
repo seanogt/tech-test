@@ -22,7 +22,6 @@ namespace AnyCompany.DataRepositories
 
             try
             {
-
                 using (SqlConnection connection = GetSqlConnection())
                 {
                     connection.Open();
@@ -55,11 +54,10 @@ namespace AnyCompany.DataRepositories
         /// </summary>
         /// <returns></returns>
         public static List<CustomerModel> GetAllCustomers()
-        {
-            List<CustomerModel> returnList = new List<CustomerModel>();
+        {            
             try
             {
-
+                List<CustomerModel> returnList = new List<CustomerModel>();
                 using (SqlConnection connection = GetSqlConnection())
                 {
                     connection.Open();

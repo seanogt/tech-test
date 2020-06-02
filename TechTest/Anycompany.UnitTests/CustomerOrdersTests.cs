@@ -24,6 +24,8 @@ namespace Anycompany.UnitTests
             var order = new OrderModel
             {
                 Amount = 2,
+                CustomerId = 1,
+                OrderId =  4
             };
             Assert.IsTrue(orderService.PlaceOrder(order,1));
         }

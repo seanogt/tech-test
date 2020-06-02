@@ -18,6 +18,10 @@ namespace AnyCompany.Services
             _orderRepository = new OrderRepository();
         }
 
+        /// <summary>
+        /// Gets a list of all the customers with a list of all their orders, respectively
+        /// </summary>
+        /// <returns>List of customers with orders</returns>
         public List<CustomerOrderModel> GetAllOrdersForAllCustomers()
         {
             try
