@@ -1,0 +1,3 @@
+﻿1. I realised part of the test was to check if I understand the security risk on SQL String with parameter being concatenated with +
+2. I decided to move the connection string to the App config and added a context to and implement entity framework.
+3. I added a bit of validation, including utils generic Entity validation, though if we have a global filter, we wouldn't need the redudant try catches.

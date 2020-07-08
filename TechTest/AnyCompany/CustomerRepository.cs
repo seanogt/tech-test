@@ -1,33 +1,50 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace AnyCompany
 {
     public static class CustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
-
+        private static readonly Utils _utils = new Utils();
+        private static readonly CustomerOrdersContext _CustomerOrderscontext = new CustomerOrdersContext();
         public static Customer Load(int customerId)
         {
-            Customer customer = new Customer();
-
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
-
-            SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
-                connection);
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
+            if (customerId == 0)
             {
-                customer.Name = reader["Name"].ToString();
-                customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Country = reader["Country"].ToString();
+                return null;
             }
 
-            connection.Close();
-
+            Customer customer = new Customer();
+            try
+            {                
+                customer = _CustomerOrderscontext.Customers.Where(x => x.Id == customerId).FirstOrDefault();                
+            }
+            catch (Exception ex)
+            { //log exception in the global filter
+                throw ex;
+            }
+                       
             return customer;
         }
+        public static void Save(Customer customer)
+        {         
+            if (!string.IsNullOrEmpty(_utils.ValidateModel(customer)))
+            {
+                throw new Exception("Invalid Model");
+            }
+
+            try
+            {
+                _CustomerOrderscontext.Customers.Add(customer);
+                _CustomerOrderscontext.SaveChanges();               
+            }
+            catch (Exception ex)
+            {
+                //log exception in the global filter
+                throw ex;
+            }            
+        }
+
     }
 }

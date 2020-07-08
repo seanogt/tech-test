@@ -1,25 +1,55 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace AnyCompany
 {
     internal class OrderRepository
-    {
-        private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
-
-        public void Save(Order order)
+    {       
+        private readonly CustomerOrdersContext _CustomerOrderscontext;
+        public OrderRepository() : this(new CustomerOrdersContext())
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
+        }
 
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
+        private OrderRepository(CustomerOrdersContext context)
+        {
+            _CustomerOrderscontext = context;
 
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
-            command.Parameters.AddWithValue("@Amount", order.Amount);
-            command.Parameters.AddWithValue("@VAT", order.VAT);
+        }
+       
+        public void Save(Order order)
+        {            
+            try
+            {
+                _CustomerOrderscontext.Orders.Add(order);
+                _CustomerOrderscontext.SaveChanges();                
+            }
+            catch (Exception ex)
+            {
+                //log exception in the global filter
+                throw ex;
+            }            
+        }
+        public IEnumerable<Order> GetAllOrders()
+        {
+            List<Order> ordersList = new List<Order>();
+            
+            try
+            {
+                _CustomerOrderscontext.Configuration.LazyLoadingEnabled = false;
+                ordersList = _CustomerOrderscontext.Orders.Include("Customer").ToList();
+                
+                return ordersList;
+            }
+            catch (Exception ex)
+            {
+                //log exception in the global filter
+                throw ex;
+            }        
 
-            command.ExecuteNonQuery();
-
-            connection.Close();
         }
     }
 }

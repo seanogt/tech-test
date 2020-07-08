@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyCompany", "AnyCompany\AnyCompany.csproj", "{C7E15594-7D8F-4C18-9DD7-14F3FBB1572D}"
 EndProject
@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6D3C1BB-2A37-4E17-9EE3-DEF28286E782}"
 	ProjectSection(SolutionItems) = preProject
 		Instructions.txt = Instructions.txt
+		AnyCompany.Tests\Solution.txt = AnyCompany.Tests\Solution.txt
 	EndProjectSection
 EndProject
 Global

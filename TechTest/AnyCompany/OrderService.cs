@@ -1,24 +1,31 @@
-﻿namespace AnyCompany
+﻿using System.Collections.Generic;
+
+namespace AnyCompany
 {
     public class OrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
-
-        public bool PlaceOrder(Order order, int customerId)
+        private readonly OrderRepository _orderRepository = new OrderRepository();
+        private readonly Utils _utils = new Utils();
+        public bool PlaceOrder(Order order, Customer customer)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            bool results = false;
+            
+            order.VAT = (customer?.Country == "UK") ? 0.2d : 0;
 
-            if (order.Amount == 0)
-                return false;
+            if (string.IsNullOrEmpty(_utils.ValidateModel(order)))
+            {
+                _orderRepository.Save(order);
+                results = true;
+            }
+           
+            return results;
+        }
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+        public IEnumerable<Order> GetCustomerOrders()
+        {
+            var ordersList = _orderRepository.GetAllOrders();
 
-            orderRepository.Save(order);
-
-            return true;
+            return ordersList;
         }
     }
 }
