@@ -8,7 +8,7 @@ namespace AnyCompany
     {
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
-        public static void Save(Order order)
+        public static int Save(Order order)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
@@ -20,16 +20,40 @@ namespace AnyCompany
             command.Parameters.AddWithValue("@Amount", order.Amount);
             command.Parameters.AddWithValue("@VAT", order.VAT);
 
-            command.ExecuteNonQuery();
+            var result = command.ExecuteNonQuery();
 
             connection.Close();
+            return result;
+        }
+
+        public static Order GetOrder(int orderId) {
+            Order order = new Order();
+
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand("SELECT * FROM Orders WHERE OrderId = " + orderId,
+                connection);
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                order.OrderId = Convert.ToInt32(reader["OrderId"]);
+                order.CustomerId = Convert.ToInt32(reader["CustomerId"]);
+                order.Amount = Convert.ToInt32(reader["Amount"].ToString());
+                order.VAT = Convert.ToInt32(reader["VAT"].ToString());
+            }
+
+            connection.Close();
+
+            return order;
         }
 
         public static List<Order> GetOrders(int customerId)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM Order Where CustomerId = " + customerId, connection);
+            SqlCommand command = new SqlCommand("SELECT * FROM Orders Where CustomerId = " + customerId, connection);
             var reader = command.ExecuteReader();
 
             List<Order> orders = new List<Order>();

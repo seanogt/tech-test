@@ -47,6 +47,11 @@
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="IServices\ICustomerService.cs" />
+    <Compile Include="IServices\IOrdersService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

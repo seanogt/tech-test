@@ -31,6 +31,24 @@ namespace AnyCompany
             return customer;
         }
 
+        public static int Save(Customer customer)
+        {
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand("INSERT INTO Customer VALUES (@CutomerId, @Name, @DateOfBirth, @Country)", connection);
+
+            command.Parameters.AddWithValue("@CutomerId", customer.CustomerId);
+            command.Parameters.AddWithValue("@Name", customer.Name);
+            command.Parameters.AddWithValue("@DateOfBirth", customer.DateOfBirth);
+            command.Parameters.AddWithValue("@Country", customer.Country);
+
+            var result = command.ExecuteNonQuery();
+
+            connection.Close();
+            return result;
+        }
+
         public static List<Customer> GetCustomers() {
             SqlConnection connection = new SqlConnection(ConnectionString);
             connection.Open();
