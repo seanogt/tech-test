@@ -66,8 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OrderUnitTests\PlaceOrderTests.cs" />
     <Compile Include="CustomerUnitTests\GetCustomersUnitTests.cs" />
+    <Compile Include="OrderUnitTests\PlaceOrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyCompany\AnyCompany.csproj">
@@ -76,7 +76,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="OrderUnitTests\" />
     <Folder Include="CustomerUnitTests\" />
   </ItemGroup>
   <ItemGroup>
