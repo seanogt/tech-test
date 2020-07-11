@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnyCompany.Repositories.Order.Repository
+namespace AnyCompany.Repositories.OrderRepository
 {
     public interface IOrderRepository
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using AnyCompany.Models;
 
 namespace AnyCompany
 {
@@ -20,9 +21,9 @@ namespace AnyCompany
 
             while (reader.Read())
             {
-                customer.Name = reader["Name"].ToString();
+                customer.FirstName = reader["Name"].ToString();
                 customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Country = reader["Country"].ToString();
+                customer.Address.Country = reader["Country"].ToString();
             }
 
             connection.Close();

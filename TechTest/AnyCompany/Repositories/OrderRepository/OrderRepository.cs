@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using AnyCompany.Models;
 
-namespace AnyCompany.Repositories.Order.Repository
+namespace AnyCompany.Repositories.OrderRepository
 {
     internal class OrderRepository
     {

@@ -23,9 +23,9 @@ namespace AnyCompany.AnyCompanyContext
         //If The project was based on .NetCore I would have used appsettings.json and configure
         //Based on the environment
         protected override void OnConfiguring(DbContextOptionsBuilder optionsbuilder)
-        { 
+        {
             optionsbuilder
-                .UseSqlServer(@"Data Source=(local);Database=Orders;User Id=admin;Password=password;")
+                .UseSqlServer(@"Data Source=(local);Database=Orders;User Id=admin;Password=password;");
         }
 
         public DbSet<Customer> Customers { get; set; }

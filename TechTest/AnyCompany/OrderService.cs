@@ -1,5 +1,5 @@
 ﻿using AnyCompany.Models;
-using AnyCompany.Repositories.Order.Repository;
+using AnyCompany.Repositories.OrderRepository;
 
 namespace AnyCompany
 {

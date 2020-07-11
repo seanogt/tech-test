@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnyCompany
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
     }
 }
