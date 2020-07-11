@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnyCompany.Repositories
+namespace AnyCompany.Repositories.CustomerRepository
 {
     public interface ICustomerRepository
     {
