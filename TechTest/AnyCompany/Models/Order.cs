@@ -1,4 +1,4 @@
-﻿namespace AnyCompany
+﻿namespace AnyCompany.Models
 {
     public class Order
     {
