@@ -14,6 +14,10 @@ namespace AnyCompany.Models
 
         public DateTime DateOfBirth { get; set; }
 
+        public string EmailAddress { get; set; }
+
+        public int ContactNumber { get; set; }
+
         public Address Address { get; set; }
     }
 }

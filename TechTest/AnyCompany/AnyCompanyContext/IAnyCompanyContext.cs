@@ -11,6 +11,9 @@ namespace AnyCompany.AnyCompanyContext
     public interface IAnyCompanyContext
     {
         DbSet<Customer> Customers { get; set; }
+
         DbSet<Order> Orders { get; set; }
+
+        DbSet<Address> Addresses { get; set; }
     }
 }
