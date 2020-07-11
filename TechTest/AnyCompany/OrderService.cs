@@ -14,7 +14,7 @@ namespace AnyCompany
             if (order.Amount == 0)
                 return false;
 
-            if (customer.Country == "UK")
+            if (customer.Address.Country == "UK")
                 order.VAT = 0.2d;
             else
                 order.VAT = 0;

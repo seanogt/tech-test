@@ -10,7 +10,7 @@ namespace AnyCompany.Models
 
         public string LastName { get; set; }
 
-        public string Country { get; set; }
+        //public string Country { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
