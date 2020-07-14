@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Data.SqlClient;
 using AnyCompany.Models;
+using AnyCompany.AnyCompanyContext;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
 
 namespace AnyCompany
 {
     public static class CustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
+        private static CompanyContext _context = new CompanyContext();
 
         public static Customer Load(int customerId)
         {
             Customer customer = new Customer();
 
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
+            var customerObject = _context.Customers.Where(x=>x.CustomerId == customerId).Select(x=>new { 
+                x.CustomerId,
+                x.FirstName,
+                x.LastName,
+                x.EmailAddress,
+                x.DateOfBirth,
+                x.CustomerAccountNumber,
+                x.ContactNumber,
+                x.Address
+            });
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
-                connection);
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                customer.FirstName = reader["Name"].ToString();
-                customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Address.Country = reader["Country"].ToString();
-            }
-
-            connection.Close();
-
-            return customer;
+            return (Customer)customerObject;
         }
     }
 }

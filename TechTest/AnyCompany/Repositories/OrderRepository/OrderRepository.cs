@@ -1,39 +1,52 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using AnyCompany.Models;
 using AnyCompany.AnyCompanyContext;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AnyCompany.Repositories.OrderRepository
 {
-    internal class OrderRepository
+    internal class OrderRepository : IOrderRepository<Order>
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
-        private IAnyCompanyContext _anycompanycontext;
+        private CompanyContext _anycompanycontext;
 
         public OrderRepository()
         {
 
         }
 
-        public OrderRepository(IAnyCompanyContext context)
+        public OrderRepository(CompanyContext context)
         {
             _anycompanycontext = context;
         }
 
+        public IEnumerable<Order> GetCustomerOrders(int id)
+        {
+            var result = _anycompanycontext.Orders.Select(x => new { x.CustomerId, x.Amount, x.OrderId }).Where(x => x.CustomerId == id);
+
+            return (List<Order>)result;
+        }
+
+        public IEnumerable<Order> GetAllOrders()
+        {
+
+            return _anycompanycontext.Orders.ToList();
+
+        }
+
         public void Save(Order order)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
 
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
+            using (var context = new CompanyContext())
+            {
+                context.Add(order);
+                context.SaveChanges();
+            }
 
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
-            command.Parameters.AddWithValue("@Amount", order.Amount);
-            command.Parameters.AddWithValue("@VAT", order.VAT);
-
-            command.ExecuteNonQuery();
-
-            connection.Close();
         }
+
     }
 }

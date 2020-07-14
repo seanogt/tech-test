@@ -9,7 +9,8 @@ namespace AnyCompany.Repositories.OrderRepository
 {
     public interface IOrderRepository<T> where T : class
     {
-        IEnumerable<Order> GetOrders();
-        IEnumerable<T> GetCustomerOrders(int id);
+        IEnumerable<T> GetAllOrders();
+        IEnumerable<T> GetCustomerOrders(int customerid);
+        void Save(Order order);
     }
 }

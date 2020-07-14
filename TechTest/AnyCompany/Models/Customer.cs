@@ -2,15 +2,11 @@
 
 namespace AnyCompany.Models
 {
-    public class Customer
+    public class Customer : Base
     {
-        public int Id { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
-        //public string Country { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
@@ -18,6 +14,5 @@ namespace AnyCompany.Models
 
         public int ContactNumber { get; set; }
 
-        public Address Address { get; set; }
     }
 }

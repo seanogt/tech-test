@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AnyCompany.AnyCompanyContext
 {
-    public class AnyCompanyContext : DbContext, IAnyCompanyContext
+    public class CompanyContext : DbContext, IAnyCompanyContext
     {
 
         //If The project was based on .NetCore I would have used appsettings.json and configure
@@ -16,7 +16,7 @@ namespace AnyCompany.AnyCompanyContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsbuilder)
         {
             optionsbuilder
-                .UseSqlServer(@"Data Source=(local);Database=Orders;User Id=admin;Password=password;");
+                .UseSqlServer(@"Data Source=LAPTOP-6NNFSG9S\SQLEXPRESS;Database=Orders;User Id=surpr;Password=Clo123@@@@;");
         }
 
         public DbSet<Customer> Customers { get; set; }
