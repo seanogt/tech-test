@@ -61,10 +61,8 @@ namespace AnyCompany.Repositories.OrderRepository
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                
-                //throw ex;
                 return false;
             }
 
