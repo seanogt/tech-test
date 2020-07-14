@@ -8,7 +8,6 @@ namespace AnyCompany
 {
     public class OrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
 
         private IUnitOfWork _unitOfWork;
 

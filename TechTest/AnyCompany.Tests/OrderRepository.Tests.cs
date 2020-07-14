@@ -10,6 +10,7 @@ using AnyCompany.Models;
 using AnyCompany.Repositories.CustomerRepository;
 using NSubstitute;
 using AnyCompany.Repositories.OrderRepository;
+using NSubstitute.ExceptionExtensions;
 
 namespace AnyCompany.Tests
 {
@@ -33,6 +34,43 @@ namespace AnyCompany.Tests
             var custorders = orderRepo.GetAllOrders();
 
             Assert.IsNotNull(custorders);
+        }
+
+        [Test]
+        public void Given_Correct_OrderObject_Check_If_SaveOrder_Works()
+        {
+            var orderRepo = Substitute.For<IUnitOfWork>();
+            var order = new Order {
+                Address = new Address{
+                    HouseNumber = 23,
+                    BuildingName = "Lister",
+                    Country = "ZAR",
+                    PostalCode = "2001",
+                    CustomerId = 2,
+                    Province = "Gauteng",
+                    StreetName = "Jeppe",
+                    Surburb = "MArshalltown"
+                },
+                Amount = 10,
+                CustomerAccountNumber = "1244",
+                CustomerId = 2,
+                OrderId = 3,
+                VAT = 0.2d
+            };
+            
+
+            Assert.DoesNotThrow(()=> orderRepo.Save(order));
+        }
+
+        [Test]
+        public void Given_Incomplete_OrderObject_Check_If_SaveOrder_Returns_Null_Or_Throws_ArgumentException()
+        {
+            var orderRepo = Substitute.For<IUnitOfWork>();
+            var order = new Order
+            {
+            };
+
+            Assert.Throws<ArgumentException>(() => orderRepo.Save(order));
         }
     }
 }

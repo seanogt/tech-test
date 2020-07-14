@@ -5,6 +5,7 @@ using AnyCompany.AnyCompanyContext;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Linq.Expressions;
 
 namespace AnyCompany.Repositories.OrderRepository
 {
@@ -37,13 +38,34 @@ namespace AnyCompany.Repositories.OrderRepository
 
         }
 
-        public void Save(Order order)
+        public bool Save(Order order)
         {
-
-            using (var context = new CompanyContext())
+            foreach (var item in order.GetType().GetProperties())
             {
-                context.Add(order);
-                context.SaveChanges();
+                if (item.PropertyType == typeof(string) && item.Equals(""))
+                {
+                    throw new ArgumentException();
+                } 
+                else if (item.PropertyType == typeof(int) && item.Equals(0))
+                {
+                    throw new ArgumentException();
+                }
+            }
+
+            try
+            {
+                using (var context = new CompanyContext())
+                {
+                    context.Add(order);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                
+                //throw ex;
+                return false;
             }
 
         }

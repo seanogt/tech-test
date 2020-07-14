@@ -42,6 +42,12 @@ namespace AnyCompany
             return new List<Order>();
         }
 
+        public IEnumerable<Order> GetAllCustomerOrders(int customerid)
+        {
+            var results = _orderRepository.GetCustomerOrders(customerid);
+            return results;
+        }
+
         public bool Save(Order order)
         {
             try

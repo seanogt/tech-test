@@ -11,6 +11,6 @@ namespace AnyCompany.Repositories.OrderRepository
     {
         IEnumerable<T> GetAllOrders();
         IEnumerable<T> GetCustomerOrders(int customerid);
-        void Save(Order order);
+        bool Save(Order order);
     }
 }
