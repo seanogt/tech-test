@@ -1,6 +1,6 @@
-﻿namespace AnyCompany
+﻿namespace AnyCompany.Models
 {
-    public class Order
+    public class Order : Base
     {
         public int OrderId { get; set; }
         public double Amount { get; set; }
