@@ -16,7 +16,7 @@ namespace AnyCompany.AnyCompanyContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsbuilder)
         {
             optionsbuilder
-                .UseSqlServer(@"Data Source=LAPTOP-6NNFSG9S\SQLEXPRESS;Database=Orders;User Id=username;Password=password;");
+                .UseSqlServer(@"Data Source=(local);Database=Orders;User Id=username;Password=password;");
         }
 
         public DbSet<Customer> Customers { get; set; }
