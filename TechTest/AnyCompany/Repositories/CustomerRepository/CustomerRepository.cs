@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 
-namespace AnyCompany
+namespace AnyCompany.Repositories.CustomerRepository
 {
     public static class CustomerRepository
     {
@@ -30,5 +30,6 @@ namespace AnyCompany
 
             return (Customer)customerObject;
         }
+
     }
 }

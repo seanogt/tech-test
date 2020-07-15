@@ -6,28 +6,35 @@ using System.Threading.Tasks;
 using AnyCompany.Models;
 using AnyCompany.Repositories.CustomerRepository;
 using NUnit.Framework;
+using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 
 namespace AnyCompany.Tests
 {
     [TestFixture]
-    public class CustomerRepository
+    public class CustomerRepositoryTest
     {
-        [TestFixtureSetUp]
-        public void SetUp()
+
+
+        [Test]
+        public static void Given_The_Correct_CustomerId_Is_Provided_Return_Correct_Customer_details ()
         {
-            var customerRepo = new CustomerRepository();
+            var customerRepo = Substitute.For<ICustomerRepository<Customer>>();
+
+            var results = CustomerRepository.Load(1);
+
+            Assert.IsNotNull(results);
+
         }
 
         [Test]
-        public void SamplePassTest()
+        public static void Given_The_InCorrect_CustomerId_Is_Provided_Return_NoDetails()
         {
-            Assert.Pass();
-        }
+            var customerRepo = Substitute.For<ICustomerRepository<Customer>>();
 
-        [Test]
-        public void CheckIfReturnTYpeOfCstomerIsOfCorrectObject()
-        { 
-            
+            var results = CustomerRepository.Load(1);
+
+            Assert.IsNull(results);
         }
     }
 }

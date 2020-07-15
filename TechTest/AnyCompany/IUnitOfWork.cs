@@ -15,6 +15,12 @@ namespace AnyCompany
 
         ICustomerRepository<Customer> CustomerRepository { get; }
 
+        IEnumerable<Customer> GetAllCustomers();
+
+        IEnumerable<Order> GetAllOrders();
+
+        IEnumerable<Order> GetAllCustomerOrders(int customerid);
+
         bool Save(Order order);
     }
 }
