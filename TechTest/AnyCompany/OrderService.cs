@@ -1,12 +1,21 @@
-﻿namespace AnyCompany
-{
-    public class OrderService
-    {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+﻿using AnyCompany.Entities;
+using AnyCompany.Models;
+using AnyCompany.RepositoryLayer;
+using System.Collections.Generic;
 
+namespace AnyCompany
+{
+    public class OrderService : IOrderService
+    {
+        private readonly UnitofWork _unitofWork;
+
+        public OrderService(UnitofWork unitofWork)
+        {
+            _unitofWork = unitofWork;
+        }
         public bool PlaceOrder(Order order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            var customer = _unitofWork.GetCustomer(customerId);
 
             if (order.Amount == 0)
                 return false;
@@ -16,9 +25,26 @@
             else
                 order.VAT = 0;
 
-            orderRepository.Save(order);
+            var newOrder = _unitofWork.SaveOrder(
+                new NewOrder
+                {
+                    Amount = order.Amount,
+                    CustomerId = customerId,
+                    OrderNumber = order.OrderNumber,
+                    VAT = order.VAT
+                });
 
-            return true;
+            return newOrder;
+        }
+
+        public CustomerOrderSet GetCustomerOrders(int customerId)
+        {
+            return _unitofWork.GetCustomerOrderSets(customerId);
+        }
+
+        public IEnumerable<CustomerOrderSet> GetCustomersWithOrders()
+        {
+            return _unitofWork.GetCustomersWithOrders();
         }
     }
 }
