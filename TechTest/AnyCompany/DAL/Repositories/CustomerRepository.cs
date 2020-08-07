@@ -21,7 +21,7 @@ namespace AnyCompany.DAL.Repositories
             return CustomerRepository.GetAll(includeOrders);
         }
 
-        public static class CustomerRepository
+        private static class CustomerRepository
         {
             public static Customer Get(int CustomerId)
             {
