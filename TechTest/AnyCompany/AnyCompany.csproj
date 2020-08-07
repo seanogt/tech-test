@@ -167,8 +167,10 @@
     <Compile Include="DAL\Interfaces\ICustomerRepository.cs" />
     <Compile Include="DAL\Interfaces\IOrderRepository.cs" />
     <Compile Include="DAL\Models\Customer.cs" />
+    <Compile Include="DAL\Repositories\CustomerRepositoryWrapper.cs" />
     <Compile Include="DAL\Repositories\CustomerRepository.cs" />
     <Compile Include="DAL\Models\Order.cs" />
+    <Compile Include="DAL\Repositories\OrderRepositoryWrapper.cs" />
     <Compile Include="DAL\Repositories\OrderRepository.cs" />
     <Compile Include="BUL\Services\OrderService.cs" />
     <Compile Include="DAL\Data\AnyCompanyContext.cs" />
