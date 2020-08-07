@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AnyCompany")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Investec Bank")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AnyCompany")]
-[assembly: AssemblyCopyright("Copyright © Investec Bank 2018")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c7e15594-7d8f-4c18-9dd7-14f3fbb1572d")]
+[assembly: Guid("e882a9a5-1265-4e61-9bbc-9a50989ba147")]
 
 // Version information for an assembly consists of the following four values:
 //
