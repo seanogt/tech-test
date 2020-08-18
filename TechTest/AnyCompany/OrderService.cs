@@ -1,10 +1,23 @@
-﻿using AnyCompany.Models;
+﻿using AnyCompany.Interfaces;
+using AnyCompany.Models;
+using AnyCompany.Repository;
+using System.Collections.Generic;
 
 namespace AnyCompany
 {
-    public class OrderService
+    public class OrderService: IOrderService
     {
         private readonly OrderRepository orderRepository = new OrderRepository();
+
+        public Customer GetCustomer(int customerId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Order> GetOrders()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public bool PlaceOrder(Order order, int customerId)
         {

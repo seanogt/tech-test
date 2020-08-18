@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AnyCompany.Repository
 {
-    internal class OrderRepository : IOrderRepository, IDisposable
+    public class OrderRepository : IOrderRepository, IDisposable
     {
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
 
