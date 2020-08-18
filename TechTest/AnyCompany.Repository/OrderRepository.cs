@@ -9,9 +9,30 @@ using System.Threading.Tasks;
 
 namespace AnyCompany.Repository
 {
-    internal class OrderRepository : IOrderRepository
+    internal class OrderRepository : IOrderRepository, IDisposable
     {
         private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
+
+        private readonly SqlConnection connection = null;
+
+        public OrderRepository()
+        {
+            try
+            {
+                connection = new SqlConnection(ConnectionString);
+                connection.Open();
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (connection != null)
+                connection.Close();
+        }
 
         public List<Order> GetOrders()
         {
@@ -20,9 +41,6 @@ namespace AnyCompany.Repository
 
         public void Save(Order order)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
-
             SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
 
             command.Parameters.AddWithValue("@OrderId", order.OrderId);
