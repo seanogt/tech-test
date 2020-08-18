@@ -37,7 +37,33 @@ namespace AnyCompany.Repository
 
         public List<Order> GetOrders()
         {
-            throw new NotImplementedException();
+            List<Order> Orders = new List<Order>();
+
+            SqlCommand command = new SqlCommand("spGetOrders",
+                connection);
+
+            command.CommandType = CommandType.StoredProcedure;
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Order order = new Order();
+                order.Customer = new Customer();
+
+                order.OrderId = (int)reader["OrderId"];
+                order.Amount = (double)reader["Amount"];
+                order.VAT = (double)reader["Country"];
+                order.CustomerId = (int)reader["CustomerId"];
+                order.Customer.CustomerId = (int)reader["CustomerId"];
+                order.Customer.Name = reader["Name"].ToString();
+                order.Customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+                order.Customer.Country = reader["Country"].ToString();
+
+                Orders.Add(order);
+            }
+
+            return Orders;
         }
 
         public void Save(Order order)
