@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AnyCompany.Interfaces
 {
-    interface IOrderService
+    public interface IOrderService
     {
         bool PlaceOrder(Order order, int customerId);
         Customer GetCustomer(int customerId);

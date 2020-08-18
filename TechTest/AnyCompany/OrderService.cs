@@ -42,9 +42,9 @@ namespace AnyCompany
                     return true;
                 }
             }
-            catch (Exception)
+            catch (Exception Ex)
             {
-                return false;
+                throw Ex;
             }
         }
     }
