@@ -1,6 +1,7 @@
 ﻿using AnyCompany.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AnyCompany.Repository
 {
     public static class CustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
+        private static string ConnectionString = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
 
         public static Customer Load(int customerId)
         {
