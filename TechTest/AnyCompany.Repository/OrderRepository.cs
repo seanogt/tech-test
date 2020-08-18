@@ -2,6 +2,7 @@
 using AnyCompany.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -41,11 +42,13 @@ namespace AnyCompany.Repository
 
         public void Save(Order order)
         {
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
+            SqlCommand command = new SqlCommand("spPlaceOrder", connection);
 
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
+            command.CommandType = CommandType.StoredProcedure;
+
             command.Parameters.AddWithValue("@Amount", order.Amount);
             command.Parameters.AddWithValue("@VAT", order.VAT);
+            command.Parameters.AddWithValue("@CustomerId", order.CustomerId);
 
             command.ExecuteNonQuery();
 
