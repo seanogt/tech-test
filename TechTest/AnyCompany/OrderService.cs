@@ -1,6 +1,7 @@
 ﻿using AnyCompany.Interfaces;
 using AnyCompany.Models;
 using AnyCompany.Repository;
+using System;
 using System.Collections.Generic;
 
 namespace AnyCompany
@@ -19,21 +20,28 @@ namespace AnyCompany
 
         public bool PlaceOrder(Order order, int customerId)
         {
-            using (OrderRepository orderRepository = new OrderRepository())
+            try
             {
-                Customer customer = GetCustomer(customerId);
+                using (OrderRepository orderRepository = new OrderRepository())
+                {
+                    Customer customer = GetCustomer(customerId);
 
-                if (order.Amount == 0)
-                    return false;
+                    if (order.Amount == 0)
+                        return false;
 
-                if (customer.Country == "UK")
-                    order.VAT = 0.2d;
-                else
-                    order.VAT = 0;
+                    if (customer.Country == "UK")
+                        order.VAT = 0.2d;
+                    else
+                        order.VAT = 0;
 
-                orderRepository.Save(order);
+                    orderRepository.Save(order);
 
-                return true;
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }
