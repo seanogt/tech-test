@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnyCompany.Tests
 {
+    //Test commit and sync
     public class Class1
     {
     }
