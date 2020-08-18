@@ -15,7 +15,10 @@ namespace AnyCompany
 
         public List<Order> GetOrders()
         {
-            throw new System.NotImplementedException();
+            using (OrderRepository orderRepository = new OrderRepository())
+            {
+                return orderRepository.GetOrders();
+            }
         }
 
         public bool PlaceOrder(Order order, int customerId)
