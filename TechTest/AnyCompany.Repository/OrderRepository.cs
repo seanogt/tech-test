@@ -2,6 +2,7 @@
 using AnyCompany.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace AnyCompany.Repository
 {
     public class OrderRepository : IOrderRepository, IDisposable
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Orders;User Id=admin;Password=password;";
+        private static string ConnectionString = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
 
         private readonly SqlConnection connection = null;
 
