@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using AnyCompany.Models;
+using System.Data.SqlClient;
 
 namespace AnyCompany
 {

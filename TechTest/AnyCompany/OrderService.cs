@@ -1,4 +1,6 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.Models;
+
+namespace AnyCompany
 {
     public class OrderService
     {
