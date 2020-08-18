@@ -7,8 +7,6 @@ namespace AnyCompany
 {
     public class OrderService: IOrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
-
         public Customer GetCustomer(int customerId)
         {
             throw new System.NotImplementedException();
@@ -21,19 +19,22 @@ namespace AnyCompany
 
         public bool PlaceOrder(Order order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            using (OrderRepository orderRepository = new OrderRepository())
+            {
+                Customer customer = CustomerRepository.Load(customerId);
 
-            if (order.Amount == 0)
-                return false;
+                if (order.Amount == 0)
+                    return false;
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+                if (customer.Country == "UK")
+                    order.VAT = 0.2d;
+                else
+                    order.VAT = 0;
 
-            orderRepository.Save(order);
+                orderRepository.Save(order);
 
-            return true;
+                return true;
+            }
         }
     }
 }
