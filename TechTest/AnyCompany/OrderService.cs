@@ -9,7 +9,7 @@ namespace AnyCompany
     {
         public Customer GetCustomer(int customerId)
         {
-            throw new System.NotImplementedException();
+            return CustomerRepository.Load(customerId);
         }
 
         public List<Order> GetOrders()
