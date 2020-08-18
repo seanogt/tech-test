@@ -21,7 +21,7 @@ namespace AnyCompany
         {
             using (OrderRepository orderRepository = new OrderRepository())
             {
-                Customer customer = CustomerRepository.Load(customerId);
+                Customer customer = GetCustomer(customerId);
 
                 if (order.Amount == 0)
                     return false;
