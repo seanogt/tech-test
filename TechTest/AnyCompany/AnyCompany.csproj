@@ -40,10 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerRepository.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderRepository.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="DAL\CustomerRepositoryWrapper.cs" />
+    <Compile Include="DAL\RepositoryBase.cs" />
+    <Compile Include="DAL\Interfaces\ICustomerRepository.cs" />
+    <Compile Include="DAL\Interfaces\IOrderRepository.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="DAL\CustomerRepository.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
