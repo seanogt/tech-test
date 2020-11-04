@@ -1,24 +1,26 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.DAL;
+using AnyCompany.Models;
+using System.Collections.Generic;
+
+namespace AnyCompany
 {
     public class OrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+        private readonly IOrderRepository _orderRepository;
 
-        public bool PlaceOrder(Order order, int customerId)
+        public OrderService(IOrderRepository orderRepository)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            _orderRepository = orderRepository;
+        }
 
-            if (order.Amount == 0)
-                return false;
+        public bool PlaceOrder(Order order)
+        {
+            return _orderRepository.Save(order);
+        }
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
-
-            orderRepository.Save(order);
-
-            return true;
+        public IEnumerable<Order> GetOrdersByCustomerId(int customerId)
+        {
+            return _orderRepository.GetOrdersByCustomerId(customerId);
         }
     }
 }
